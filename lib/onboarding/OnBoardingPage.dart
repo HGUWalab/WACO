@@ -1,4 +1,3 @@
-import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:wacoproject/firebase_db/db_manager_onboarding.dart';
@@ -35,7 +34,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           color: OnboardThemeData.blue1,
           activeColor: Colors.white,
         ),
-        //그냥 color 사용시 밑에 부분은 흰색으로 남는데 이거 사용하면 전체가 색이 변함.
         pages: [
           PageViewModel(
             decoration: PageDecoration(
@@ -53,7 +51,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               height: height*0.3,
               width: width*0.8,
               //color: grey,
-
               alignment: Alignment.centerLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,30 +199,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           });
         },
       );
-    }
-  }
-
-  void chipFloor(int tag) {
-  }
-
-  void chipFloorTag(int tag) {
-    if (tag == 0) {
-      //갈대상자관
-    } else if (tag == 1) {
-      //국제관
-    } else if (tag == 2) {
-      //로뎀관
-    } else if (tag == 3) {
-      //비전관
-    } else if (tag == 4) {
-      //은혜관
-    } else if (tag == 5) {
-      //하용조관
-    } else if (tag == 6) {
-      //벧엘관
-
-    } else {
-      //창조관
     }
   }
 
