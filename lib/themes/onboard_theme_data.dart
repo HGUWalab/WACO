@@ -7,6 +7,7 @@ class OnboardThemeData{
   static const Color blue2 = Color(0xffB0C4FF);
   static const Color blue1 = Color(0xffE1EBF7);
 
+  //Title text in Onboarding Page
   static Text titleText(String input) {
     return Text('$input',
         style: TextStyle(
@@ -17,17 +18,7 @@ class OnboardThemeData{
         ));
   }
 
-  static Text chipTitleText(String input) {
-    return Text(
-      '$input',
-      style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-          fontFamily: 'NotoSansKR',
-          color: Colors.white),
-    );
-  }
-
+  //Subtitle text in Onboarding Page
   static Text subTitleText(String input){
     return Text(
       '$input',
@@ -39,13 +30,13 @@ class OnboardThemeData{
     );
   }
 
+  //Main Image format in Onboarding Page
   static Container mainImage(double height, double width, String input){
     return Container(
       alignment: Alignment.bottomCenter,
       height: height*0.6,
       width: width*0.8,
       child: Image.asset('$input', width: width * 0.8),
-      //color: grey
     );
   }
 
