@@ -1,16 +1,17 @@
 //This class is made to handle firebase in Onboarding page.
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
-class DBManagerOnboard{
+class OnboardingModel{
 
   static final FirebaseFirestore db = FirebaseFirestore.instance;
 
   static void firebaseUserUpload(String user) {
     var stl = db.collection('users');
     var now = DateTime.now();
-    stl.add({
+    String dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);    stl.add({
       'name': user,
-      'regDate': now
+      'regDate': dateFormat
     }).then((value) => print("entered data"))
         .catchError((error) => print('This error occured "$error'));
   }

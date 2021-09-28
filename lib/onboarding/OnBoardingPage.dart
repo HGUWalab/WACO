@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:wacoproject/firebase_db/db_manager_onboarding.dart';
+import 'package:wacoproject/model/empty_model.dart';
+import 'package:wacoproject/model/main_model.dart';
+import 'package:wacoproject/model/onboarding_model.dart';
 import 'package:wacoproject/onboarding/choice_chip_dorm.dart';
 import 'package:wacoproject/onboarding/choice_chip_floor.dart';
 import 'package:wacoproject/themes/onboard_theme_data.dart';
@@ -220,7 +222,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   fontSize: 18,
                   color: OnboardThemeData.blue2)),
           onPressed: () async {
-            DBManagerOnboard.firebaseUserUpload(name.text);
+            EmptyModel.getRunningTime('4', '1', '2gunjoki');
+            MainModel.getMachineCount('4','1', 'gunjokiCount');
+            MainModel.getMachineState('4', '1', '1gunjoki');
+            OnboardingModel.firebaseUserUpload(name.text);
           },
         ),
       );
