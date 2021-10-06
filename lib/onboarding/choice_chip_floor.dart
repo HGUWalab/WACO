@@ -1,5 +1,7 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
+import 'package:wacoproject/model/main_model.dart';
+import 'package:wacoproject/onboarding/choice_chip_dorm.dart';
 import 'package:wacoproject/themes/onboard_theme_data.dart';
 
 
@@ -10,12 +12,17 @@ import 'package:wacoproject/themes/onboard_theme_data.dart';
 class ChoiceChipFloor extends StatefulWidget {
   _ChoiceChipFloorState chipFloor = new _ChoiceChipFloorState();
 
+  static int tag = 0;
+
+  static int getFloorTag(){
+    return tag+1;
+  }
+
   @override
   _ChoiceChipFloorState createState() => chipFloor;
 }
 
 class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
-  int tag = 0;
   List<String> options = [
     '1층',
     '2층',
@@ -37,10 +44,10 @@ class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
       spacing: 15.0,
       runSpacing: height*0.005,
       wrapped: true,
-      value: tag,
+      value: ChoiceChipFloor.tag,
       onChanged: (val) => setState(() {
-        tag = val;
-        print(tag);
+        ChoiceChipFloor.tag = val;
+        print(ChoiceChipFloor.tag);
       }),
       choiceItems: C2Choice.listFrom<int, String>(
         source: options,

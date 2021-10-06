@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:wacoproject/main/main_page.dart';
 import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/model/onboarding_model.dart';
@@ -223,9 +225,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   color: OnboardThemeData.blue2)),
           onPressed: () async {
             EmptyModel.getRunningTime('4', '1', '2gunjoki');
-            MainModel.getMachineCount('4','1', 'gunjokiCount');
-            MainModel.getMachineState('4', '1', '1gunjoki');
+            print(await MainModel.getMachineCount('4','1', 'gunjokiCount'));
+            var e2 = await MainModel.getMachineState('4', '1', '1gunjoki');
             OnboardingModel.firebaseUserUpload(name.text);
+            print(e2);
+            Get.off(MainPage(dorm: ChoiceChipDorm.getDormTag(),floor: ChoiceChipFloor.getFloorTag()));
           },
         ),
       );

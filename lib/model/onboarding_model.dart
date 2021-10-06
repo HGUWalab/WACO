@@ -12,7 +12,6 @@ class OnboardingModel{
     String dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss").format(now);    stl.add({
       'name': user,
       'regDate': dateFormat
-    }).then((value) => print("entered data"))
-        .catchError((error) => print('This error occured "$error'));
+    });
   }
 }
