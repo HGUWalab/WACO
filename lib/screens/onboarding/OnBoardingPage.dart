@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:wacoproject/main/main_page.dart';
 import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/model/onboarding_model.dart';
-import 'package:wacoproject/onboarding/choice_chip_dorm.dart';
-import 'package:wacoproject/onboarding/choice_chip_floor.dart';
+import 'package:wacoproject/screens/home/home.dart';
+import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_dorm.dart';
+import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_floor.dart';
 import 'package:wacoproject/themes/onboard_theme_data.dart';
+import 'package:wacoproject/utils/colors.dart';
+import 'package:wacoproject/utils/text.dart';
 
 
 /*
@@ -21,16 +23,14 @@ class OnBoardingPage extends StatefulWidget {
 }
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
-  TextEditingController name = TextEditingController();
+  static TextEditingController name = TextEditingController();
   bool typedIn = false;
   bool isChecked = false;
-  ChoiceChipDorm chipDorm = new ChoiceChipDorm();
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: IntroductionScreen(
         globalBackgroundColor: OnboardThemeData.blue2,
@@ -60,8 +60,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
-                  OnboardThemeData.titleText('안녕하세요.'),
-                  OnboardThemeData.subTitleText('한동인을 위한 세탁어플 “WACO” 입니다 ☺'),
+                  Text('안녕하세요.',
+                      style: head1style(color: white)),
+                  Text('한동인을 위한 세탁어플 “WACO” 입니다 ☺',
+                      style: subtitle1style(color: white))
                 ],
               ),
             ),
@@ -76,8 +78,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     SizedBox(
                       height: height * 0.08,
                     ),
-                    OnboardThemeData.titleText('Your Room'),
-                    OnboardThemeData.subTitleText('사용자의 거주 호관과 층수를 입력하세요'),
+                    Text('Your Room',
+                        style: head1style(color: white)),
+                    Text('사용자의 거주 호관과 층수를 입력하세요',
+                        style: subtitle1style(color: white))
                   ],
                 ),
               ),
@@ -102,7 +106,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   titlePadding: EdgeInsets.all(1),
                   footerPadding: EdgeInsets.all(1)
               ),
-              titleWidget: OnboardThemeData.mainImage(height, width, 'assets/on2.png'),
+              titleWidget: Container(
+                alignment: Alignment.bottomCenter,
+                height: height*0.6,
+                width: width*0.8,
+                child: Image.asset('assets/on2.png', width: width * 0.8),
+              ),
               bodyWidget: Container(
                   height: height*0.15,
                   width: width*0.8,
@@ -112,8 +121,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      OnboardThemeData.titleText('NAME'),
-                      OnboardThemeData.subTitleText('사용자의 이름을 입력해주세요'),
+                      Text('NAME',
+                          style: head1style(color: white)),
+                      Text('사용자의 이름을 입력해주세요',
+                          style: subtitle1style(color: white))
                     ],
                   )),
               footer: Container(
@@ -180,6 +191,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
+
+
   FlatButton buildCheckButton() {
     if (isChecked == true) {
       return FlatButton(
@@ -224,12 +237,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   fontSize: 18,
                   color: OnboardThemeData.blue2)),
           onPressed: () async {
-            EmptyModel.getRunningTime('4', '1', '2gunjoki');
-            print(await MainModel.getMachineCount('4','1', 'gunjokiCount'));
-            var e2 = await MainModel.getMachineState('4', '1', '1gunjoki');
             OnboardingModel.firebaseUserUpload(name.text);
-            print(e2);
-            Get.off(MainPage(dorm: ChoiceChipDorm.getDormTag(),floor: ChoiceChipFloor.getFloorTag()));
+            Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(),
+                floor: ChoiceChipFloor.getFloorTag()));
           },
         ),
       );
@@ -263,8 +273,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       //EdgeInsets.fromLTRB(width * 0.05, height * 0.01, width * 0.05, 0),
         child: Theme(
           data: ThemeData(
-            primaryColor: OnboardThemeData.blue2,
-            primaryColorDark: OnboardThemeData.blue2,
+            primaryColor: primary,
+            primaryColorDark: primary,
           ),
           child: TextField(
             maxLength: inputMax,

@@ -1,7 +1,6 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:wacoproject/model/main_model.dart';
-import 'package:wacoproject/onboarding/choice_chip_dorm.dart';
 import 'package:wacoproject/themes/onboard_theme_data.dart';
 
 
