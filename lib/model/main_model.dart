@@ -54,10 +54,13 @@ class MainModel{
   //문서까지 접근해서 특정 필드 가져오기
   static Future<bool> getMachineState(String dormNumber, String floor, String machineName) async {
     bool available = false;
-    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floor).doc(machineName)
-    .get().then((value) {
-      available = value.data()!['state'];
-    });
+    try{
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floor).doc(machineName)
+          .get().then((value) {
+        available = value.data()!['state'];
+      });
+    }catch(e){
+    }
     return available;
   }
 
@@ -84,8 +87,6 @@ class MainModel{
       case 7: pageName = '창조관 '; break;
     }
     pageName = pageName + "$floor" + "층";
-    print(pageName);
-
     return pageName;
   }
 /*

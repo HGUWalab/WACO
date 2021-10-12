@@ -18,4 +18,23 @@ class EmptyModel{
     });
   }
 
+  static void changeState(String dormNumber, String floorNumber, String machineName) async{
+    var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber);
+    bool available = false;
+    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+        .get().then((value) {
+      available = value.data()!['state'];
+    });
+    if(available == true){
+      stl.doc(machineName)
+          .set({
+        'state' : false
+      });
+    }else{
+      stl.doc(machineName)
+          .set({
+        'state' : true
+      });
+    }
+  }
 }
