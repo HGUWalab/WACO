@@ -1,0 +1,43 @@
+name: wacoproject
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  get:
+  introduction_screen:
+  chips_choice:
+  firebase_database:
+  firebase_core:
+  cloud_firestore:
+  intl:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+
+fonts:
+  - family: NotoSansKR
+    fonts:
+      - asset: fonts/NotoSansKR-Light.otf
+      - asset: fonts/NotoSansKR-Black.otf
+      - asset: fonts/NotoSansKR-Bold.otf
+      - asset: fonts/NotoSansKR-Medium.otf
+      - asset: fonts/NotoSansKR-Thin.otf
+      - asset: fonts/NotoSansKR-Regular.otf
