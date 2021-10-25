@@ -14,7 +14,9 @@ dependencies:
   chips_choice:
   firebase_database:
   firebase_core:
+  pinput:
   cloud_firestore:
+  rflutter_alert:
   intl:
   flutter:
     sdk: flutter

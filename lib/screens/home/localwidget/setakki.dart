@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/screens/empty/empty.dart';
+import 'package:wacoproject/screens/empty/localwidget/dialog.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 
