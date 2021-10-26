@@ -4,14 +4,34 @@ import 'package:wacoproject/utils/text.dart';
 import 'package:get/get.dart';
 import 'package:wacoproject/widgets/appbar.dart';
 import 'package:wacoproject/widgets/button_theme.dart';
+import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 
-class SomeoneIsUsingPage extends StatelessWidget {
-  const SomeoneIsUsingPage({ Key? key }) : super(key: key);
+class SomeoneIsUsingPage extends StatefulWidget {
+  int dorm;
+  int floor;
+  int number;
+  String machineName;
+  SomeoneIsUsingPage(this.dorm,this.floor, this.number, this.machineName);
+
+  @override
+  _SomeoneIsUsingPageState createState() => _SomeoneIsUsingPageState();
+}
+
+class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
+  String user = '';
+
+  Future<void> getUser() async {
+    user = await MainModel.getUserName(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+    if(this.mounted){
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    getUser();
     return Scaffold(
         backgroundColor: white,
         appBar: buildAppBar(),
@@ -28,7 +48,7 @@ class SomeoneIsUsingPage extends StatelessWidget {
                 ),
                 height: 38,
                 width: 178,
-                child: Text('하*님 사용중',
+                child: Text('$user님 사용중',
                   style: body1style(color: grey),
                 ),
               ),
@@ -44,7 +64,9 @@ class SomeoneIsUsingPage extends StatelessWidget {
               ),
               SizedBox(height: 160,),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.back();
+                  },
                   style: longButtonStyle,
                   child: Text('홈으로',
                     style: body1style(color: white),

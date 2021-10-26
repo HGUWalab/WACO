@@ -5,6 +5,17 @@ class MainModel{
 
   static final FirebaseFirestore db = FirebaseFirestore.instance;
 
+  static Future<String> getUserName(String dormNumber, String floor, String machineName) async{
+    String userName = '';
+    try{
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floor).doc(machineName)
+          .get().then((value) {
+        userName = value.data()!['name'];
+      });
+    }catch(e){}
+    return userName;
+  }
+
   //문서까지 접근해서 특정 필드 가져오기
   static Future<bool> getMachineState(String dormNumber, String floor, String machineName) async {
     bool available = false;
@@ -13,8 +24,7 @@ class MainModel{
           .get().then((value) {
         available = value.data()!['state'];
       });
-    }catch(e){
-    }
+    }catch(e){}
     return available;
   }
 
@@ -43,6 +53,7 @@ class MainModel{
     pageName = pageName + "$floor" + "층";
     return pageName;
   }
+}
 /*
   static Future<int> getFloor(int dormNumber) async {
     int count = 0;
@@ -73,4 +84,3 @@ class MainModel{
     return toReturn;
   }
   */
-}

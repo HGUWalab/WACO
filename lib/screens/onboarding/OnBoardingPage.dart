@@ -5,7 +5,6 @@ import 'package:wacoproject/model/onboarding_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_dorm.dart';
 import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_floor.dart';
-import 'package:wacoproject/themes/onboard_theme_data.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 import 'package:wacoproject/utils/user.dart';
@@ -32,9 +31,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: IntroductionScreen(
-        globalBackgroundColor: OnboardThemeData.blue2,
+        globalBackgroundColor: primary,
         dotsDecorator: DotsDecorator(
-          color: OnboardThemeData.blue1,
+          color: secondary,
           activeColor: Colors.white,
         ),
         pages: [
@@ -154,8 +153,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    OnboardThemeData.titleText('Honor Code'),
-                    OnboardThemeData.subTitleText('모든 준비가 끝났습니다! 마지막으로\n정직한 한동인으로서 약속하나 해주세요 😊'),
+                    Text('Honor Code',
+                    style: body1style(color: white),),
+                    Text('모든 준비가 끝났습니다! 마지막으로\n정직한 한동인으로서 약속하나 해주세요 😊',
+                    style: body1style(color: white),),
                   ]),
             ),
             footer: Container(
@@ -172,7 +173,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           buildCheckButton(),
-                          OnboardThemeData.subTitleText('나는 한동인으로서 아너코드를 지키며\n본 어플리케이션을 이용할 것을 약속합니다.'),
+                          Text('나는 한동인으로서 아너코드를 지키며\n본 어플리케이션을 이용할 것을 약속합니다.',
+                          style: body1style(color: white)),
                         ],
                       ),
                     ),

@@ -73,7 +73,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           decoration: this.checkBoxDeco(),
         ),
         onPressed: (){
-          Get.to(SomeoneIsUsingPage());
+          Get.to(SomeoneIsUsingPage(widget.dorm, widget.floor, widget.number, widget.machineName));
         },
       );
     }else{

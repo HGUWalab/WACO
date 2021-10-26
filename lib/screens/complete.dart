@@ -8,7 +8,6 @@ import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 
 class CompletePage extends StatelessWidget {
-  const CompletePage({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

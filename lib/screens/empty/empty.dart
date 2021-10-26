@@ -14,7 +14,7 @@ class EmptyPage extends StatefulWidget {
   int number;
   String machineName;
 
-  EmptyPage(this.dorm,this.floor, this.number, this.machineName);
+  EmptyPage(this.dorm, this.floor, this.number, this.machineName);
 
   @override
   _EmptyPageState createState() => _EmptyPageState();
