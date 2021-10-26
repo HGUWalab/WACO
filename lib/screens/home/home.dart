@@ -31,7 +31,9 @@ class _HomePageState extends State<HomePage> {
     this.setakkiCount = count;
     count = await MainModel.getMachineCount(dorm.toString(), widget.floor.toString(), 'gunjokiCount');
     this.gunjokiCount = count;
-    setState((){});
+    if(this.mounted){
+      setState((){});
+    }
   }
 
   @override

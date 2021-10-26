@@ -230,11 +230,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               borderRadius: BorderRadius.circular(50)),
           child: Text('시작하기',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: 'NotoSansKR',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18,
-                  color: OnboardThemeData.blue2)),
+              style: body1style(color: primary)),
           onPressed: () async {
             OnboardingModel.firebaseUserUpload(name.text);
             UserData.updateDormAndFloor(ChoiceChipDorm.getDormTag(), ChoiceChipFloor.getFloorTag());//마지막 층과 기숙사 번호 SharedPreference로 저장해놓음.
@@ -248,16 +244,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         height: 37,
         width: 126,
         child: FlatButton(
-          color: OnboardThemeData.blue2,
+          color: primary,
           shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.white),
               borderRadius: BorderRadius.circular(50)),
           child: Text('시작하기',
-              style: TextStyle(
-                  fontFamily: 'NotoSansKR',
-                  fontWeight: FontWeight.w300,
-                  fontSize: 18,
-                  color: Colors.white)),
+              style: body1style(color: white)),
           onPressed: () {},
         ),
       );

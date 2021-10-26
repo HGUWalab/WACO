@@ -33,8 +33,14 @@ class OnboardingModel{
     var collection = await db.collection('dormAndFloor').doc(dormNumber)
         .get().then((value) {
       floor = value.data()!['floor'];
-      for(int i = 1; i <= floor; i++){
-        floors.add(i.toString()+"층");
+      if(dormNumber=='5'){
+        for(int i = 3; i <= floor; i++){
+          floors.add(i.toString()+"층");
+        }
+      }else{
+        for(int i = 1; i <= floor; i++){
+          floors.add(i.toString()+"층");
+        }
       }
     });
     return floors;

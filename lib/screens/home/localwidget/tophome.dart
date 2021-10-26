@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wacoproject/model/main_model.dart';
+import 'package:wacoproject/screens/setting/setting.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 import 'package:wacoproject/utils/user.dart';
@@ -62,7 +64,7 @@ class TopHome extends StatelessWidget {
   FlatButton buildFlatButton(String dorm) {
     return FlatButton(
       onPressed: () {
-        //Get.to(DormSettingPage(userName: userName));
+        Get.off(SettingPage());
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,

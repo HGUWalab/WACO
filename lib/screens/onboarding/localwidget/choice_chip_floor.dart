@@ -28,7 +28,9 @@ class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
 
   Future<void> getCount() async {
     options = await OnboardingModel.getDormFloor(ChoiceChipDorm.tag.toString());
-    setState((){});
+    if(this.mounted){
+      setState((){});
+    }
   }
 
   List<String> options = [];
