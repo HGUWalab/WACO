@@ -1,8 +1,7 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
-import 'package:wacoproject/model/main_model.dart';
-import 'package:wacoproject/themes/onboard_theme_data.dart';
-
+import 'package:wacoproject/utils/colors.dart';
+import 'package:wacoproject/utils/text.dart';
 
 /*
  * 온보드 화면과 세팅 화면에 사용하는 ChoiceChip화면으로 하나를 고르면 하나가 취소되는 형식으로 구성되었다.
@@ -54,24 +53,15 @@ class _ChoiceChipDormState extends State<ChoiceChipDorm> {
         label: (i, v) => v,
       ),
       choiceStyle: C2ChoiceStyle(
-          color: OnboardThemeData.blue2,
+          color: primary,
           brightness: Brightness.dark,
           borderWidth: 1,
           borderColor: Colors.white,
-          labelStyle: TextStyle(
-              fontSize: 18.0,
-              color: Colors.white,
-              fontFamily: 'NotoSansKR',
-              fontWeight: FontWeight.w500),
+          labelStyle: body1style(color: white),
           showCheckmark: false),
-      //text color를 바꾸는 듯 하다
       choiceActiveStyle: C2ChoiceStyle(
         color: Colors.white,
-        labelStyle: TextStyle(
-            fontSize: 18.0,
-            color: OnboardThemeData.blue2,
-            fontFamily: 'NotoSansKR',
-            fontWeight: FontWeight.w500),
+        labelStyle: body1style(color: primary),
       ), //클릭 되었을 때 text 색을 바꾼
     );
   }

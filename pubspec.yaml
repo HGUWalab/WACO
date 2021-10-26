@@ -9,13 +9,18 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  animated_splash_screen:
   get:
   introduction_screen:
   chips_choice:
   firebase_database:
   firebase_core:
+  pinput:
   cloud_firestore:
+  rflutter_alert:
   intl:
+  uuid:
+  shared_preferences:
   flutter:
     sdk: flutter
 

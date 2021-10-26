@@ -37,12 +37,13 @@ TextStyle subtitle2style({Color? color}) {
   );
 }
 
-TextStyle body1style({Color? color}) {
+TextStyle body1style({Color? color, double? height}) {
   return TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
     fontFamily: 'NotoSansKR',
     color: color,
+    height: height
   );
 }
 

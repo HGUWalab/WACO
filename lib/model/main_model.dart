@@ -5,50 +5,27 @@ class MainModel{
 
   static final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  static Row buildTopMain(BuildContext context, String dorm) {
-    return Row(children: <Widget>[
-      SizedBox(
-        width: 40.0,
-      ),
-      Text(
-        '안녕하세요 ',
-        style: TextStyle(
-          letterSpacing: 2.0,
-          fontFamily: 'NotoSansKR',
-          fontWeight: FontWeight.w300,
-          fontSize: 18.0,
-        ),
-      ),
-      Text(
-        '김영헌',
-        style: TextStyle(
-          fontSize: 24.0,
-          fontFamily: 'NotoSansKR',
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-      Text(
-        '님',
-        style: TextStyle(
-          letterSpacing: 2.0,
-          fontFamily: 'NotoSansKR',
-          fontWeight: FontWeight.w300,
-          fontSize: 18.0,
-        ),
-      ),
-      SizedBox(
-        width: 30.0,
-      ),
-      Container(
-          width: 177.03,
-          height: 35.02,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(500.0),
-            border: Border.all(
-                color: Color(0xffB0C4FF), style: BorderStyle.solid, width: 0.800),
-          ),
-          child: Text(dorm)),
-    ]);
+  static Future<String> getUserName(String dormNumber, String floor, String machineName) async{
+    String userName = '';
+    try{
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floor).doc(machineName)
+          .get().then((value) {
+        userName = value.data()!['name'];
+      });
+    }catch(e){}
+    return userName;
+  }
+
+  static Future<String> getUserID(String dormNumber, String floor, String machineName) async{
+    String userID = '';
+    try{
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floor).doc(machineName)
+          .get().then((value) {
+        userID = value.data()!['userID'];
+      });
+    }catch(e){}
+    print(userID);
+    return userID;
   }
 
   //문서까지 접근해서 특정 필드 가져오기
@@ -59,8 +36,7 @@ class MainModel{
           .get().then((value) {
         available = value.data()!['state'];
       });
-    }catch(e){
-    }
+    }catch(e){}
     return available;
   }
 
@@ -89,6 +65,7 @@ class MainModel{
     pageName = pageName + "$floor" + "층";
     return pageName;
   }
+}
 /*
   static Future<int> getFloor(int dormNumber) async {
     int count = 0;
@@ -119,4 +96,3 @@ class MainModel{
     return toReturn;
   }
   */
-}

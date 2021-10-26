@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:wacoproject/model/empty_model.dart';
-import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/model/onboarding_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_dorm.dart';
 import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_floor.dart';
-import 'package:wacoproject/themes/onboard_theme_data.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 
 
 /*
@@ -33,9 +31,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: IntroductionScreen(
-        globalBackgroundColor: OnboardThemeData.blue2,
+        globalBackgroundColor: primary,
         dotsDecorator: DotsDecorator(
-          color: OnboardThemeData.blue1,
+          color: secondary,
           activeColor: Colors.white,
         ),
         pages: [
@@ -155,8 +153,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    OnboardThemeData.titleText('Honor Code'),
-                    OnboardThemeData.subTitleText('모든 준비가 끝났습니다! 마지막으로\n정직한 한동인으로서 약속하나 해주세요 😊'),
+                    Text('Honor Code',
+                    style: body1style(color: white),),
+                    Text('모든 준비가 끝났습니다! 마지막으로\n정직한 한동인으로서 약속하나 해주세요 😊',
+                    style: body1style(color: white),),
                   ]),
             ),
             footer: Container(
@@ -173,7 +173,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           buildCheckButton(),
-                          OnboardThemeData.subTitleText('나는 한동인으로서 아너코드를 지키며\n본 어플리케이션을 이용할 것을 약속합니다.'),
+                          Text('나는 한동인으로서 아너코드를 지키며\n본 어플리케이션을 이용할 것을 약속합니다.',
+                          style: body1style(color: white)),
                         ],
                       ),
                     ),
@@ -231,15 +232,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               borderRadius: BorderRadius.circular(50)),
           child: Text('시작하기',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: 'NotoSansKR',
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18,
-                  color: OnboardThemeData.blue2)),
+              style: body1style(color: primary)),
           onPressed: () async {
             OnboardingModel.firebaseUserUpload(name.text);
-            Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(),
-                floor: ChoiceChipFloor.getFloorTag()));
+            UserData.updateDormAndFloor(ChoiceChipDorm.getDormTag(), ChoiceChipFloor.getFloorTag());//마지막 층과 기숙사 번호 SharedPreference로 저장해놓음.
+            UserData.setData();//저장한 내용들 한번 업데이트 진행해줌
+            Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(), floor: ChoiceChipFloor.getFloorTag()));
           },
         ),
       );
@@ -248,16 +246,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         height: 37,
         width: 126,
         child: FlatButton(
-          color: OnboardThemeData.blue2,
+          color: primary,
           shape: RoundedRectangleBorder(
               side: BorderSide(color: Colors.white),
               borderRadius: BorderRadius.circular(50)),
           child: Text('시작하기',
-              style: TextStyle(
-                  fontFamily: 'NotoSansKR',
-                  fontWeight: FontWeight.w300,
-                  fontSize: 18,
-                  color: Colors.white)),
+              style: body1style(color: white)),
           onPressed: () {},
         ),
       );
