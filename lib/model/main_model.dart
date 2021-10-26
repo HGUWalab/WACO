@@ -16,6 +16,18 @@ class MainModel{
     return userName;
   }
 
+  static Future<String> getUserID(String dormNumber, String floor, String machineName) async{
+    String userID = '';
+    try{
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floor).doc(machineName)
+          .get().then((value) {
+        userID = value.data()!['userID'];
+      });
+    }catch(e){}
+    print(userID);
+    return userID;
+  }
+
   //문서까지 접근해서 특정 필드 가져오기
   static Future<bool> getMachineState(String dormNumber, String floor, String machineName) async {
     bool available = false;

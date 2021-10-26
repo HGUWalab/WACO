@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:wacoproject/widgets/appbar.dart';
 import 'package:wacoproject/widgets/button_theme.dart';
 import 'package:wacoproject/model/main_model.dart';
-import 'package:wacoproject/model/empty_model.dart';
-import 'package:wacoproject/screens/home/home.dart';
 
 class SomeoneIsUsingPage extends StatefulWidget {
   int dorm;
