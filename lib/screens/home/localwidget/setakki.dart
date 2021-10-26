@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/screens/empty/empty.dart';
+import 'package:wacoproject/screens/someone_is_using/someone_is_using.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 
@@ -54,22 +55,39 @@ class _BuildSetakkiState extends State<BuildSetakki> {
             SizedBox(
               height: height*0.015,
             ),
-            FlatButton(
-              child: Container(
-                width: 75,
-                height: 89.37,
-                decoration: this.checkBoxDeco(),
-              ),
-              onPressed: (){
-                Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName));
-              },
-            ),
+            buildFlatButton(),
             SizedBox(
               height: height*0.01
             ),
             checkText(),
           ]),
     );
+  }
+
+  FlatButton buildFlatButton() {
+    if(state == false){
+      return FlatButton(
+        child: Container(
+          width: 75,
+          height: 89.37,
+          decoration: this.checkBoxDeco(),
+        ),
+        onPressed: (){
+          Get.to(SomeoneIsUsingPage());
+        },
+      );
+    }else{
+      return FlatButton(
+        child: Container(
+          width: 75,
+          height: 89.37,
+          decoration: this.checkBoxDeco(),
+        ),
+        onPressed: (){
+          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName));
+        },
+      );
+    }
   }
 
   BoxDecoration checkBoxDeco()  {
