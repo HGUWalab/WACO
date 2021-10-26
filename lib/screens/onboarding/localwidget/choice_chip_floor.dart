@@ -1,6 +1,8 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:wacoproject/model/main_model.dart';
+import 'package:wacoproject/model/onboarding_model.dart';
+import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_dorm.dart';
 import 'package:wacoproject/themes/onboard_theme_data.dart';
 
 
@@ -12,6 +14,7 @@ class ChoiceChipFloor extends StatefulWidget {
   _ChoiceChipFloorState chipFloor = new _ChoiceChipFloorState();
 
   static int tag = 0;
+  static bool chipUpdate = false;
 
   static int getFloorTag(){
     return tag+1;
@@ -22,22 +25,19 @@ class ChoiceChipFloor extends StatefulWidget {
 }
 
 class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
-  List<String> options = [
-    '1층',
-    '2층',
-    '3층',
-    '4층',
-    '5층',
-    '6층',
-    '7층',
-    '8층',
-  ];
+
+  Future<void> getCount() async {
+    options = await OnboardingModel.getDormFloor(ChoiceChipDorm.tag.toString());
+    setState((){});
+  }
+
+  List<String> options = [];
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-
+    getCount();
     return ChipsChoice<int>.single(
       alignment: WrapAlignment.center,
       spacing: 15.0,

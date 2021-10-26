@@ -90,24 +90,8 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'ads',
-              style: TextStyle(
-                fontFamily: 'NotoSansKR',
-                fontWeight: FontWeight.w700,
-                color: Colors.grey,
-                letterSpacing: 1.0,
-                fontSize: 15,
-              ),
-            ),
-            Text(
-              '님 사용중',
-              style: TextStyle(
-                fontFamily: 'NotoSansKR',
-                fontWeight: FontWeight.w700,
-                color: Colors.grey,
-                letterSpacing: 1.0,
-                fontSize: 12,
-              ),
+              '사용중',
+              style: body1style(color: grey)
             ),
           ]);
     else

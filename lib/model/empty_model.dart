@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:wacoproject/utils/user.dart';
 
 class EmptyModel{
 
@@ -30,13 +31,17 @@ class EmptyModel{
       stl.doc(machineName)
           .set({
         'state' : false,
-        'endTime' : time
+        'endTime' : time,
+        'name' : UserData.userName,
+        'userID' : UserData.documentId
       });
     }else{
       stl.doc(machineName)
           .set({
         'state' : true,
-        'endTime' : time
+        'endTime' : time,
+        'name' : '',
+        'userID' : ''
       });
     }
   }

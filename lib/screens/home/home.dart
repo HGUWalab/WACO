@@ -25,18 +25,13 @@ class _HomePageState extends State<HomePage> {
 
   int gunjokiCount=0;
 
-  bool update = false;
-
   Future<void> getCount(int dorm) async {
     int count = 0;
     count = await MainModel.getMachineCount(dorm.toString(), widget.floor.toString(), 'setakkiCount');
     this.setakkiCount = count;
     count = await MainModel.getMachineCount(dorm.toString(), widget.floor.toString(), 'gunjokiCount');
     this.gunjokiCount = count;
-    if(update == false){
-      setState((){});
-      update = true;
-    }
+    setState((){});
   }
 
   @override

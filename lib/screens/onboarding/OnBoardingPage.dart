@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:wacoproject/model/empty_model.dart';
-import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/model/onboarding_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_dorm.dart';
@@ -10,6 +8,7 @@ import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_floor.dar
 import 'package:wacoproject/themes/onboard_theme_data.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 
 
 /*
@@ -238,8 +237,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   color: OnboardThemeData.blue2)),
           onPressed: () async {
             OnboardingModel.firebaseUserUpload(name.text);
-            Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(),
-                floor: ChoiceChipFloor.getFloorTag()));
+            UserData.updateDormAndFloor(ChoiceChipDorm.getDormTag(), ChoiceChipFloor.getFloorTag());//마지막 층과 기숙사 번호 SharedPreference로 저장해놓음.
+            UserData.setData();//저장한 내용들 한번 업데이트 진행해줌
+            Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(), floor: ChoiceChipFloor.getFloorTag()));
           },
         ),
       );

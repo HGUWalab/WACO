@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/screens/empty/empty.dart';
-import 'package:wacoproject/screens/empty/localwidget/dialog.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 
@@ -96,24 +95,8 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'ads',
-              style: TextStyle(
-                fontFamily: 'NotoSansKR',
-                fontWeight: FontWeight.w700,
-                color: Colors.grey,
-                letterSpacing: 1.0,
-                fontSize: 15,
-              ),
-            ),
-            Text(
-              '님 사용중',
-              style: TextStyle(
-                fontFamily: 'NotoSansKR',
-                fontWeight: FontWeight.w700,
-                color: Colors.grey,
-                letterSpacing: 1.0,
-                fontSize: 12,
-              ),
+              '사용중',
+              style: body1style(color: grey)
             ),
           ]);
     else

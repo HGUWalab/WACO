@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  animated_splash_screen:
   get:
   introduction_screen:
   chips_choice:
@@ -18,6 +19,8 @@ dependencies:
   cloud_firestore:
   rflutter_alert:
   intl:
+  uuid:
+  shared_preferences:
   flutter:
     sdk: flutter
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 
 class TopHome extends StatelessWidget {
   int dorm;
@@ -13,6 +14,7 @@ class TopHome extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var userName = UserData.userName;
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -25,7 +27,7 @@ class TopHome extends StatelessWidget {
                   style: body2style(color: darkGrey)
               ),
               Text(
-                  'req',
+                  '$userName',
                   style: head2style(color: darkGrey)
               ),
               Text(

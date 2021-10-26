@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:wacoproject/model/empty_model.dart';
-import 'package:wacoproject/screens/empty/localwidget/dialog.dart';
 import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
@@ -60,6 +59,7 @@ class _EmptyPageState extends State<EmptyPage> {
             style: body1style(color: primary),
           ),
           onPressed: () => setState(() {
+            _pinPutController.clear();
             EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(), widget.machineName, _pinPutController.text);
             Get.off(HomePage(dorm: widget.dorm, floor: widget.floor));
           }),
