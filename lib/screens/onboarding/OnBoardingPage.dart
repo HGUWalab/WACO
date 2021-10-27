@@ -154,9 +154,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Honor Code',
-                    style: body1style(color: white),),
+                    style: head1style(color: white),),
                     Text('모든 준비가 끝났습니다! 마지막으로\n정직한 한동인으로서 약속하나 해주세요 😊',
-                    style: body1style(color: white),),
+                    style: subtitle1style(color: white),),
                   ]),
             ),
             footer: Container(
@@ -174,7 +174,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         children: <Widget>[
                           buildCheckButton(),
                           Text('나는 한동인으로서 아너코드를 지키며\n본 어플리케이션을 이용할 것을 약속합니다.',
-                          style: body1style(color: white)),
+                          style: subtitle2style(color: white)),
                         ],
                       ),
                     ),

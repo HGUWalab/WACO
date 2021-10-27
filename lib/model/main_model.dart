@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class MainModel{
 
@@ -13,6 +12,7 @@ class MainModel{
         userName = value.data()!['name'];
       });
     }catch(e){}
+    print(userName);
     return userName;
   }
 
@@ -24,7 +24,6 @@ class MainModel{
         userID = value.data()!['userID'];
       });
     }catch(e){}
-    print(userID);
     return userID;
   }
 

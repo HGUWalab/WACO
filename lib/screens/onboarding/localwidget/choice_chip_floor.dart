@@ -48,7 +48,6 @@ class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
       value: ChoiceChipFloor.tag,
       onChanged: (val) => setState(() {
         ChoiceChipFloor.tag = val;
-        print(ChoiceChipFloor.tag);
       }),
       choiceItems: C2Choice.listFrom<int, String>(
         source: options,

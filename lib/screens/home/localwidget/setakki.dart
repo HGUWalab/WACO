@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/screens/empty/empty.dart';
+import 'package:wacoproject/screens/process/process.dart';
 import 'package:wacoproject/screens/someone_is_using/someone_is_using.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
@@ -77,7 +78,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           String userID = await MainModel.getUserID(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
           final SharedPreferences pref = await SharedPreferences.getInstance();
           if((pref.getString('documentId')==userID)){
-            Get.to(SomeoneIsUsingPage(widget.dorm, widget.floor, widget.number, widget.machineName));
+            Get.to(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
           }else{
             Get.to(SomeoneIsUsingPage(widget.dorm, widget.floor, widget.number, widget.machineName));
           }

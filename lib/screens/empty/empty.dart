@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:wacoproject/model/empty_model.dart';
-import 'package:wacoproject/screens/home/home.dart';
+import 'package:wacoproject/screens/process/process.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/widgets/appbar.dart';
 
 class EmptyPage extends StatefulWidget {
 
@@ -59,9 +60,10 @@ class _EmptyPageState extends State<EmptyPage> {
             style: body1style(color: primary),
           ),
           onPressed: () => setState(() {
+            EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(),
+                widget.machineName, _pinPutController.text);
             _pinPutController.clear();
-            EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(), widget.machineName, _pinPutController.text);
-            Get.off(HomePage(dorm: widget.dorm, floor: widget.floor));
+            Get.off(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
           }),
           color: white,
         ),
@@ -179,29 +181,9 @@ class _EmptyPageState extends State<EmptyPage> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    print(widget.machineName);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        title: Image.asset(
-            'assets/logo1.png',
-            width: 80.0
-        ),
-        leading: Padding(
-            padding: EdgeInsets.only(left:width*0.05),
-            child: IconButton(
-              icon: Icon(Icons.home_sharp,
-                size: 35,
-                color: primary,),
-              onPressed: () {
-                Get.back();
-              },
-            )
-        ),
-      ),
+      appBar: appBar2(width, widget.dorm, widget.floor),
       body: Center(
         child: Container(
           //color: grey,
