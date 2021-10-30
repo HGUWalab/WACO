@@ -47,6 +47,26 @@ class EmptyModel{
     }
   }
 
+  static void announceOther(String dormNumber, String floorNumber, String machineName, String time) async{
+    var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber);
+    bool available = false;
+    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+        .get().then((value) {
+      available = value.data()!['state'];
+    });
+    if(available == true){
+      stl.doc(machineName)
+          .set({
+        'state' : false,
+        'endTime' : EmptyModel.getTimeDone(time),
+        'inputTime' : time,
+        'name' : '어플미사용자',
+        'userID' : ''
+      });
+    }
+  }
+
+
   static String getTimeDone(String inputTime){
     DateTime now = DateTime.now();
     String currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
@@ -56,16 +76,20 @@ class EmptyModel{
   }
 
   static Future<int> getTimeLeft(String dormNumber, String floorNumber, String machineName) async {
-    DateTime now = DateTime.now();
-    String currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
-    var nowTime = DateTime.parse(currentTime);
-    String doneTime = '';
-    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
-          .get().then((value) {
-            doneTime = value.data()!['endTime'];
-          });
-    var fireBaseTime = DateTime.parse(doneTime);
-    return int.parse(fireBaseTime.difference(nowTime).inMinutes.toString())+1;
+    try {
+      DateTime now = DateTime.now();
+      String currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+      var nowTime = DateTime.parse(currentTime);
+      String doneTime = '';
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+            .get().then((value) {
+              doneTime = value.data()!['endTime'];
+            });
+      var fireBaseTime = DateTime.parse(doneTime);
+
+      return int.parse(fireBaseTime.difference(nowTime).inMinutes.toString())+1;
+    } on Exception catch (e) {}
+    return 0;
   }
 
   static Future<int> getInputTime(String dormNumber, String floorNumber, String machineName) async {

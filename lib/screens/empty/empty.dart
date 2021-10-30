@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:wacoproject/model/empty_model.dart';
+import 'package:wacoproject/screens/complete.dart';
 import 'package:wacoproject/screens/process/process.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
@@ -14,8 +15,9 @@ class EmptyPage extends StatefulWidget {
   int floor;
   int number;
   String machineName;
+  String machineKind;
 
-  EmptyPage(this.dorm, this.floor, this.number, this.machineName);
+  EmptyPage(this.dorm, this.floor, this.number, this.machineName, this.machineKind);
 
   @override
   _EmptyPageState createState() => _EmptyPageState();
@@ -24,6 +26,7 @@ class EmptyPage extends StatefulWidget {
 class _EmptyPageState extends State<EmptyPage> {
   static TextEditingController _pinPutController = new TextEditingController();
   late String pin = '';
+  bool isUser = true;
 
   get buttonsRowDirection => null;
   BoxDecoration get _pinPutDecoration {
@@ -60,10 +63,17 @@ class _EmptyPageState extends State<EmptyPage> {
             style: body1style(color: primary),
           ),
           onPressed: () => setState(() {
-            EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(),
-                widget.machineName, _pinPutController.text);
-            _pinPutController.clear();
-            Get.off(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
+            if(isUser){
+              EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(),
+                  widget.machineName, _pinPutController.text);
+              _pinPutController.clear();
+              Get.off(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
+            }else{
+              EmptyModel.announceOther(widget.dorm.toString(), widget.floor.toString(),
+                  widget.machineName, _pinPutController.text);
+              _pinPutController.clear();
+              Get.off(CompletePage(widget.dorm, widget.floor));
+            }
           }),
           color: white,
         ),
@@ -179,6 +189,7 @@ class _EmptyPageState extends State<EmptyPage> {
   }
 
   Widget build(BuildContext context) {
+    String machineKind = widget.machineKind;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -204,7 +215,7 @@ class _EmptyPageState extends State<EmptyPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/사용가능 세탁기.png',
+                          'assets/사용가능 $machineKind기.png',
                           width: 75,
                           height: 89,
                         ),
@@ -212,7 +223,7 @@ class _EmptyPageState extends State<EmptyPage> {
                           width: width*0.1,
                         ),
                         Text(
-                          '세탁하기',
+                          '$machineKind하기',
                           style: body4style(color: lightBlue)
                         )
                       ],
@@ -252,6 +263,7 @@ class _EmptyPageState extends State<EmptyPage> {
                     ),
                   ),
                   onPressed: () {
+                    isUser = false;
                     showAlertDialog(width, height, context,"😎\n다른 학우들을 위해 남은 시간을 알려주세요!\n사용 현황에는 이름이 뜨지 않으니 안심하세요😊");
                   },
                 ),

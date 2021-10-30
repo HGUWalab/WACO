@@ -92,7 +92,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           decoration: this.checkBoxDeco(),
         ),
         onPressed: (){
-          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName));
+          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName, "세탁"));
         },
       );
     }

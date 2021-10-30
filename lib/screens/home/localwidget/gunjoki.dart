@@ -87,7 +87,7 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
           decoration: this.checkBoxDeco(),
         ),
         onPressed: (){
-          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName));
+          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName, "건조"));
         },
       );
     }

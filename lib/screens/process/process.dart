@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/model/main_model.dart';
+import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 import 'package:wacoproject/widgets/appbar.dart';
@@ -152,8 +153,8 @@ class _ProcessState extends State<Process> {
         onPressed: () {
           EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(), widget.machineName, "0");
           first = true;
-          Get.back();
-        },
+          Get.to(HomePage(dorm: widget.dorm, floor: widget.floor));
+          },
         child: Text('세탁물 수거하기',
           style: body4style(color: white)
         ),

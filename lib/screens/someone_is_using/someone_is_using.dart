@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wacoproject/model/empty_model.dart';
+import 'package:wacoproject/screens/singo/singo.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 import 'package:get/get.dart';
@@ -19,9 +21,11 @@ class SomeoneIsUsingPage extends StatefulWidget {
 
 class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
   String user = '';
+  int timeLeft = 0;
 
   Future<void> getUser() async {
     user = await MainModel.getUserName(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+    timeLeft = await EmptyModel.getTimeLeft(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     if(this.mounted){
       setState(() {});
     }
@@ -54,7 +58,7 @@ class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
               Text('남은 시간',
                 style: body1style(color: grey),
               ),
-              Text('24',
+              Text('$timeLeft',
                 style: body5style(color: primary),
               ),
               Text('minutes',
@@ -71,8 +75,12 @@ class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
                   )
               ),
               SizedBox(height: 25,),
-              Text('⚠️ 허위 상태 신고하기',
-                style: body1style(color: grey),
+              TextButton(
+                child: Text('⚠️ 허위 상태 신고하기',
+                  style: body1style(color: grey)),
+                onPressed: ((){
+                  Get.to(SingoPage(widget.dorm, widget.floor, widget.machineName, user));
+                }),
               ),
             ],
           ),
