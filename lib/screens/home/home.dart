@@ -25,11 +25,11 @@ class _HomePageState extends State<HomePage> {
 
   int gunjokiCount=0;
 
-  Future<void> getCount(int dorm) async {
+  Future<void> getCount() async {
     int count = 0;
-    count = await MainModel.getMachineCount(dorm.toString(), widget.floor.toString(), 'setakkiCount');
+    count = await MainModel.getMachineCount(widget.dorm.toString(), widget.floor.toString(), 'setakkiCount');
     this.setakkiCount = count;
-    count = await MainModel.getMachineCount(dorm.toString(), widget.floor.toString(), 'gunjokiCount');
+    count = await MainModel.getMachineCount(widget.dorm.toString(), widget.floor.toString(), 'gunjokiCount');
     this.gunjokiCount = count;
     if(this.mounted){
       setState((){});
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    getCount(widget.dorm);
+    getCount();
     return Scaffold(
       backgroundColor: white,
       appBar: buildAppBar(),

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/onboarding/OnBoardingPage.dart';
 import 'package:wacoproject/utils/user.dart';
 
@@ -48,8 +49,7 @@ class Home extends StatelessWidget {
     if(UserData.isLoggedIn==false){
       return OnBoardingPage();
     }else{
-      return OnBoardingPage();
-      //HomePage(dorm: UserData.lastDorm, floor: UserData.lastFloor);
+      return HomePage(dorm: UserData.lastDorm, floor: UserData.lastFloor);
     }
   }
 }

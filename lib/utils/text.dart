@@ -19,6 +19,15 @@ TextStyle head2style({Color? color}) {
   );
 }
 
+TextStyle head3style({Color? color}){
+  return TextStyle(
+      fontSize: 40,
+      color: color,
+      fontFamily: 'NotoSansKR',
+      fontWeight: FontWeight.bold,
+  );
+}
+
 TextStyle subtitle1style({Color? color}) {
   return TextStyle(
     fontSize: 18,
@@ -62,6 +71,7 @@ TextStyle body3style({Color? color}) {
     fontWeight: FontWeight.w400,
     fontFamily: 'NotoSansKR',
     color: color,
+    height: 2
   );
 }
 

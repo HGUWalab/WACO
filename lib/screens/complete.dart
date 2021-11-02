@@ -8,6 +8,9 @@ import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 
 class CompletePage extends StatelessWidget {
+  int floor, dorm;
+
+  CompletePage(this.dorm, this.floor);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,9 @@ class CompletePage extends StatelessWidget {
               ),
               SizedBox(height: 139,),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.off(HomePage(dorm: dorm, floor: floor));
+                  },
                   style: longButtonStyle,
                   child: Text('홈으로',
                     style: body1style(color: white),

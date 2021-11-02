@@ -45,7 +45,6 @@ class _ChoiceChipDormState extends State<ChoiceChipDorm> {
       value: ChoiceChipDorm.tag,
       onChanged: (val) => setState(() {
         ChoiceChipDorm.tag = val;
-        print(ChoiceChipDorm.tag);
       }),
       choiceItems: C2Choice.listFrom<int, String>(
         source: options,
