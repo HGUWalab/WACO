@@ -5,6 +5,7 @@ import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_dorm.dart
 import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_floor.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -51,7 +52,8 @@ class _SettingPageState extends State<SettingPage> {
                 child: Text('시작하기',
                     style: body1style(color: primary)),
                 onPressed: () {
-                  Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(), floor: ChoiceChipFloor.getFloorTag()));
+                  UserData.updateDormAndFloor(ChoiceChipDorm.tag, ChoiceChipFloor.tag+1);
+                  Get.off(HomePage(dorm: ChoiceChipDorm.tag, floor: ChoiceChipFloor.tag+1));
                 },
               ),
             )

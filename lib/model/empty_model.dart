@@ -26,6 +26,16 @@ class EmptyModel{
         .get().then((value) {
       available = value.data()!['state'];
     });
+    if(time == "0"){
+      stl.doc(machineName)
+          .set({
+        'state' : true,
+        'endTime' : "none",
+        'inputTime' : 0,
+        'name' : '',
+        'userID' : ''
+      });
+    }
     if(available == true){
       stl.doc(machineName)
           .set({
@@ -39,7 +49,7 @@ class EmptyModel{
       stl.doc(machineName)
           .set({
         'state' : true,
-        'endTime' : '',
+        'endTime' : "none",
         'inputTime' : 0,
         'name' : '',
         'userID' : ''
@@ -83,11 +93,14 @@ class EmptyModel{
       String doneTime = '';
       var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
             .get().then((value) {
-              doneTime = value.data()!['endTime'];
+              doneTime = value.data()?['endTime'];
             });
-      var fireBaseTime = DateTime.parse(doneTime);
-
-      return int.parse(fireBaseTime.difference(nowTime).inMinutes.toString())+1;
+      if(doneTime == "none"){
+        return 1;
+      }else{
+        var fireBaseTime = DateTime.parse(doneTime);
+        return int.parse(fireBaseTime.difference(nowTime).inMinutes.toString());
+      }
     } on Exception catch (e) {}
     return 0;
   }

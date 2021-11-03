@@ -46,7 +46,7 @@ class _ProcessState extends State<Process> {
   }
 
   void startTimer() {
-    const oneMin = const Duration(seconds: 1);
+    const oneMin = const Duration(minutes: 1);
     _timer = new Timer.periodic(oneMin, (Timer timer) {
       if (_count == 0) {
         if(this.mounted){
@@ -90,7 +90,6 @@ class _ProcessState extends State<Process> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           child: LinearProgressIndicator(
-
                             value: value, //1.0
                             color: Color(0xffB0C4FF),
                             backgroundColor: Color(0xffE1EBF7),
@@ -109,6 +108,15 @@ class _ProcessState extends State<Process> {
                       height:60,
                       child: buildTextButton(),
                     ),
+                    Center(
+                      child: TextButton(
+                        child: Text("작동 취소하기", style: body1style(color: darkGrey)),
+                        onPressed: ((){
+                          EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(), widget.machineName, "0");
+                          Get.off(HomePage(dorm: widget.dorm, floor: widget.floor,));
+                        }) ,
+                      ),
+                    )
                   ]
               ),
             )
