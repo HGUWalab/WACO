@@ -22,10 +22,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int i=1;
 
-  int setakkiCount=0;
-  int gunjokiCount=0;
   int setakkiAvailable=0;
   int gunjokiAvailable=0;
+  int setakkiCount=0;
+  int gunjokiCount=0;
 
   Future<void> getCount() async {
     int count = 0;

@@ -29,14 +29,11 @@ class OnboardingModel{
   }
 
   static Future<int> getStateCount(String dormNumber, String dormFloor, String machineKind) async{
-    int machineCount = 2;
-    //await MainModel.getMachineCount(dormNumber, dormFloor, machineKind);
     int availableCount = 0;
-    for(int i = 1; i <= machineCount; i++) {
-      bool available = await MainModel.getMachineState(
-          dormNumber, dormFloor, "$i$machineKind");
-      if (available == true) availableCount++;
-    }
+    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(dormFloor).doc('machineCount')
+      .get().then((value) async{
+        availableCount = value.data()!['available$machineKind'];
+    });
     return availableCount;
   }
 
