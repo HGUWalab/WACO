@@ -5,6 +5,7 @@ import 'package:wacoproject/screens/home/localwidget/gunjoki.dart';
 import 'package:wacoproject/screens/home/localwidget/setakki.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 import 'package:wacoproject/widgets/appbar.dart';
 import 'package:wacoproject/screens/home/localwidget/tophome.dart';
 
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var userName = UserData.userName;
     getCount();
     return Scaffold(
       backgroundColor: white,
@@ -51,8 +53,9 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
           padding: EdgeInsets.fromLTRB(
               width * 0.1, height * 0.01, width * 0.1, 0),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
+
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
                   padding:
@@ -135,13 +138,36 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Center(
-                      child:Container(
-                        child: TextButton(
-                          child: Text("남은시간 보러가기", style: subtitle2style(color: darkGrey),),
-                          onPressed: () {},
-                        ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10,),
+                          Container(
+                            width :350,
+                            height :30,
+                            //color: darkGrey,
+                            decoration: BoxDecoration(
+                              color: darkGrey,
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(15.0) 
+                              ),
+                            ), 
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/basket.png', width: 25, height: 20,),
+                                SizedBox(width: 10,),
+                                Text('$userName님은 ', style: body9style(color: white),),
+                                Text('1번 세탁기', style: body7style(color: white),),
+                                Text('를 사용중입니다.', style: body9style(color: white),)
+                              ],
+                            )
+                          ),
+                          TextButton(
+                            child: Text("남은시간 보러가기", style: subtitle2style(color: darkGrey),),
+                            onPressed: () {},
+                          ),
+                        ],
                       ),
-
                     ),
                   ],
                 ),
