@@ -14,32 +14,25 @@ class ChoiceChipFloor extends StatefulWidget {
   _ChoiceChipFloorState chipFloor = new _ChoiceChipFloorState();
 
   static int tag = 0;
-  static bool chipUpdate = false;
-
-  static int getFloorTag(){
-    return tag+1;
-  }
 
   @override
   _ChoiceChipFloorState createState() => chipFloor;
 }
 
 class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
-
+  List<String> options = [];
   Future<void> getCount() async {
     options = await OnboardingModel.getDormFloor(ChoiceChipDorm.tag.toString());
     if(this.mounted){
-      setState((){});
+      setState(() {});
     }
   }
 
-  List<String> options = [];
-
   @override
   Widget build(BuildContext context) {
+    getCount();
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    getCount();
     return ChipsChoice<int>.single(
       alignment: WrapAlignment.center,
       spacing: 15.0,

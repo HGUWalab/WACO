@@ -1,5 +1,7 @@
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
+import 'package:wacoproject/model/onboarding_model.dart';
+import 'package:wacoproject/screens/onboarding/localwidget/choice_chip_floor.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 
@@ -14,10 +16,6 @@ class ChoiceChipDorm extends StatefulWidget {
 
   @override
   _ChoiceChipDormState createState() => chipDorm;
-
-  static int getDormTag() {
-    return tag;
-  }
 }
 
 class _ChoiceChipDormState extends State<ChoiceChipDorm> {
@@ -43,7 +41,7 @@ class _ChoiceChipDormState extends State<ChoiceChipDorm> {
       runSpacing: height*0.005,
       wrapped: true,
       value: ChoiceChipDorm.tag,
-      onChanged: (val) => setState(() {
+      onChanged: (val) => setState((){
         ChoiceChipDorm.tag = val;
       }),
       choiceItems: C2Choice.listFrom<int, String>(

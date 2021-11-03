@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:wacoproject/model/empty_model.dart';
 
 class MainModel{
 
@@ -28,6 +29,16 @@ class MainModel{
     return userID;
   }
 
+  static Future<int> getStateCount(String dormNumber, String dormFloor, String machineKind) async{
+    int machineCount = await MainModel.getMachineCount(dormNumber, dormFloor, machineKind);
+    int availableCount = 0;
+    for(int i = 1; i <= machineCount; i++) {
+      bool available = await MainModel.getMachineState(
+          dormNumber, dormFloor, "$i$machineKind");
+      if (available == true) availableCount++;
+    }
+    return availableCount;
+  }
   //문서까지 접근해서 특정 필드 가져오기
   static Future<bool> getMachineState(String dormNumber, String floor, String machineName) async {
     bool available = false;
@@ -49,6 +60,14 @@ class MainModel{
     });
     return count;
   }
+
+  static Future<void> checkDoneMachine(String dormNumber, String floor, String machineName)async {
+    int timeLeft = await EmptyModel.getTimeLeft(dormNumber, floor, machineName);
+    if(timeLeft < 0 ){
+      EmptyModel.changeState(dormNumber, floor, machineName, "0");
+    }
+  }
+
 
   static String getPageName(int dorm, int floor){
     String pageName = '';
