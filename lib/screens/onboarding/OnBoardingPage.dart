@@ -235,9 +235,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               style: body1style(color: primary)),
           onPressed: () async {
             OnboardingModel.firebaseUserUpload(name.text);
-            UserData.updateDormAndFloor(ChoiceChipDorm.getDormTag(), ChoiceChipFloor.getFloorTag());//마지막 층과 기숙사 번호 SharedPreference로 저장해놓음.
+            UserData.updateDormAndFloor(ChoiceChipDorm.tag, ChoiceChipFloor.tag+1);//마지막 층과 기숙사 번호 SharedPreference로 저장해놓음.
             UserData.setData();//저장한 내용들 한번 업데이트 진행해줌
-            Get.off(HomePage(dorm: ChoiceChipDorm.getDormTag(), floor: ChoiceChipFloor.getFloorTag()));
+            Get.off(HomePage(dorm: ChoiceChipDorm.tag, floor: ChoiceChipFloor.tag+1));
           },
         ),
       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wacoproject/model/main_model.dart';
+import 'package:wacoproject/model/onboarding_model.dart';
 import 'package:wacoproject/screens/home/localwidget/gunjoki.dart';
 import 'package:wacoproject/screens/home/localwidget/setakki.dart';
 import 'package:wacoproject/utils/colors.dart';
@@ -22,8 +23,9 @@ class _HomePageState extends State<HomePage> {
   int i=1;
 
   int setakkiCount=0;
-
   int gunjokiCount=0;
+  int setakkiAvailable=0;
+  int gunjokiAvailable=0;
 
   Future<void> getCount() async {
     int count = 0;
@@ -31,6 +33,8 @@ class _HomePageState extends State<HomePage> {
     this.setakkiCount = count;
     count = await MainModel.getMachineCount(widget.dorm.toString(), widget.floor.toString(), 'gunjokiCount');
     this.gunjokiCount = count;
+    setakkiAvailable = await OnboardingModel.getStateCount(widget.dorm.toString(), widget.floor.toString(), "setakki");
+    gunjokiAvailable = await OnboardingModel.getStateCount(widget.dorm.toString(), widget.floor.toString(), "gunjoki");
     if(this.mounted){
       setState((){});
     }
@@ -55,8 +59,22 @@ class _HomePageState extends State<HomePage> {
                   EdgeInsets.fromLTRB(0, height * 0.01, 0, height * 0.04),
                   child: TopHome(widget.dorm, widget.floor),
                 ),
-                Text('세탁기',
-                    style: head2style(color: darkGrey)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('세탁기',
+                        style: head2style(color: darkGrey)),
+                    RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(text: '사용가능: ', style: subtitle2style(color: grey)),
+                            TextSpan(text: '$setakkiAvailable', style: body1style(color: darkGrey)),
+                            TextSpan(text:'대', style: subtitle2style(color: grey))
+                          ]
+                        )
+                    ),
+                  ],
+                ),
                 SizedBox(height:height*0.01),
                 Column(
                   children: [
@@ -84,8 +102,22 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('건조기',
-                        style: head2style(color: darkGrey)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('건조기',
+                            style: head2style(color: darkGrey)),
+                        RichText(
+                            text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(text: '사용가능: ', style: subtitle2style(color: grey)),
+                                  TextSpan(text: '$gunjokiAvailable', style: body1style(color: darkGrey)),
+                                  TextSpan(text:'대', style: subtitle2style(color: grey))
+                                ]
+                            )
+                        ),
+                      ],
+                    ),
                     SizedBox(height:10),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: height*0.01),
@@ -103,6 +135,15 @@ class _HomePageState extends State<HomePage> {
                             );
                           }
                       ),
+                    ),
+                    Center(
+                      child:Container(
+                        child: TextButton(
+                          child: Text("남은시간 보러가기", style: subtitle2style(color: darkGrey),),
+                          onPressed: () {},
+                        ),
+                      ),
+
                     ),
                   ],
                 ),

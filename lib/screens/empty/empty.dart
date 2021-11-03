@@ -4,6 +4,7 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/screens/complete.dart';
+import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/process/process.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
@@ -67,7 +68,7 @@ class _EmptyPageState extends State<EmptyPage> {
               EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(),
                   widget.machineName, _pinPutController.text);
               _pinPutController.clear();
-              Get.off(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
+              Get.off(HomePage(dorm: widget.dorm, floor: widget.floor));
             }else{
               EmptyModel.announceOther(widget.dorm.toString(), widget.floor.toString(),
                   widget.machineName, _pinPutController.text);

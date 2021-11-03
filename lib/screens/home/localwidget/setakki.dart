@@ -25,6 +25,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
   bool update = false;
 
   Future<void> getState() async {
+    MainModel.checkDoneMachine(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
     state = await MainModel.getMachineState(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     this.state = state;
