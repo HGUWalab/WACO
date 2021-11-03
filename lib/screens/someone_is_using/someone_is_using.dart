@@ -66,13 +66,13 @@ class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
               ),
               SizedBox(height: 160,),
               ElevatedButton(
-                  onPressed: (){
-                    Get.back();
-                  },
-                  style: longButtonStyle,
-                  child: Text('홈으로',
-                    style: body1style(color: white),
-                  )
+                onPressed: (){
+                  Get.back();
+                },
+                style: longButtonStyle,
+                child: Text('홈으로',
+                  style: body1style(color: white),
+                )
               ),
               SizedBox(height: 25,),
               TextButton(

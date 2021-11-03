@@ -101,3 +101,31 @@ TextStyle body6style({Color? color}) {
     color: color,
   );
 }
+
+TextStyle body7style({Color? color}) {
+  return TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'NotoSansKR',
+    color: color,
+  );
+}
+
+TextStyle body8style({Color? color}) {
+  return TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'NotoSansKR',
+    color: color,
+  );
+}
+
+TextStyle body9style({Color? color}) {
+  return TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    fontFamily: 'NotoSansKR',
+    color: color,
+  );
+}
+

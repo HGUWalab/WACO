@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.wacoproject">
+    package="com.example.wacoproject"
+    android:versionCode="1000"
+    android:versionName="1.0.0">
    <application
         android:label="wacoproject"
         android:icon="@mipmap/ic_launcher">
