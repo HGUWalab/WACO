@@ -76,26 +76,23 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 SizedBox(height:height*0.01),
-                Column(
-                  children: [
-                    Container(
-                      height: height * 0.23,
-                      width: width * 0.9,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                          separatorBuilder: (BuildContext context, int index) => const Divider(),
-                          itemCount: setakkiCount,
-                          itemBuilder: (BuildContext context, int index){
-                            return Row(
-                              children: [
-                                BuildSetakki(widget.dorm, widget.floor, index+1 ,'${index+1}setakki'),
-                                SizedBox(width: width*0.05)
-                              ],
-                            );
-                          }
-                      ),
-                    ),
-                  ],
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: height*0.01),
+                  height: height * 0.23,
+                  width: width * 0.9,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (BuildContext context, int index) => const Divider(),
+                    itemCount: setakkiCount,
+                    itemBuilder: (BuildContext context, int index){
+                      return Row(
+                        children: [
+                          BuildSetakki(widget.dorm, widget.floor, index+1 ,'${index+1}setakki'),
+                          SizedBox(width: width*0.05)
+                        ],
+                      );
+                    }
+                  )
                 ),
                 SizedBox(height : height*0.05),
                 Column(
@@ -118,22 +115,23 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    SizedBox(height:10),
+                    SizedBox(height:height*0.01),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: height*0.01),
-                      height: width*0.46,
+                      height: height * 0.23,
+                      width: width * 0.9,
                       child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: (BuildContext context, int index) => const Divider(),
-                          itemCount: gunjokiCount,
-                          itemBuilder: (BuildContext context, int index){
-                            return Row(
-                              children: [
-                                BuildGunjoki(widget.dorm, widget.floor, index+1 ,'${index+1}gunjoki'),
-                                SizedBox(width: width*0.05)
-                              ],
-                            );
-                          }
+                        scrollDirection: Axis.horizontal,
+                        separatorBuilder: (BuildContext context, int index) => const Divider(),
+                        itemCount: gunjokiCount,
+                        itemBuilder: (BuildContext context, int index){
+                          return Row(
+                            children: [
+                              BuildGunjoki(widget.dorm, widget.floor, index+1 ,'${index+1}gunjoki'),
+                              SizedBox(width: width*0.05)
+                            ],
+                          );
+                        }
                       ),
                     ),
                     Center(

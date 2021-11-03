@@ -22,17 +22,12 @@ class BuildSetakki extends StatefulWidget {
 
 class _BuildSetakkiState extends State<BuildSetakki> {
   var state;
-  bool update = false;
 
   Future<void> getState() async {
     MainModel.checkDoneMachine(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
     state = await MainModel.getMachineState(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     this.state = state;
-    if(update = false){
-      setState((){});
-      update = true;
-    }
   }//무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
 
   @override
@@ -43,7 +38,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
     return Container(
       decoration: BoxDecoration(
         color: secondary,
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        borderRadius: BorderRadius.all(Radius.circular(10.0))),
       width: 140,
       height: 230,
       child: Column(

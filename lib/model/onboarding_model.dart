@@ -53,13 +53,13 @@ class OnboardingModel{
         for(int i = 3; i <= floor; i++){
           setakki = await getStateCount(dormNumber, "$i", "setakki");
           gunjoki= await getStateCount(dormNumber, "$i", "gunjoki");
-          floors.add(i.toString()+"층           $setakki / $gunjoki");
+          floors.add(i.toString()+"층        $setakki / $gunjoki");
         }
       }else{
         for(int i = 1; i <= floor; i++){
           setakki = await getStateCount(dormNumber, "$i", "setakki");
           gunjoki= await getStateCount(dormNumber, "$i", "gunjoki");
-          floors.add(i.toString()+"층          $setakki / $gunjoki");
+          floors.add(i.toString()+"층       $setakki / $gunjoki");
         }
       }
     });

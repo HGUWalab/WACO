@@ -37,8 +37,8 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
     getState(); //화면이 만들어지기 전에 Future<void> getState()를 통해 변수들에 값들을 저장해준다.
     return Container(
       decoration: BoxDecoration(
-          color: secondary,
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        color: secondary,
+        borderRadius: BorderRadius.all(Radius.circular(10.0))),
       width: 140,
       height: 230,
       child: Column(
