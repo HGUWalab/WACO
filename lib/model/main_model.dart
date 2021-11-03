@@ -13,7 +13,6 @@ class MainModel{
         userName = value.data()!['name'];
       });
     }catch(e){}
-    print('MainModel/getUserName-\nusername: $userName\ndormNumber: $dormNumber, floor: $floor,  machineName:$machineName');
     return userName;
   }
 
@@ -25,7 +24,6 @@ class MainModel{
         userID = value.data()!['userID'];
       });
     }catch(e){}
-    print('MainModel/getUserID-\nuserID: $userID\ndormNumber: $dormNumber, floor: $floor,  machineName:$machineName');
     return userID;
   }
 

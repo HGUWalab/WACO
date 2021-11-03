@@ -22,6 +22,7 @@ class EmptyModel{
   static void changeState(String dormNumber, String floorNumber, String machineName, String time) async{
     var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber);
     bool available = false;
+    var machineKind = machineName.substring(1, machineName.length);
     var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
         .get().then((value) {
       available = value.data()!['state'];
@@ -45,6 +46,10 @@ class EmptyModel{
         'name' : UserData.userName,
         'userID' : UserData.documentId
       });
+      stl.doc("machineCount")
+          .update({
+        'available$machineKind' : FieldValue.increment(-1)
+      });
     }else{
       stl.doc(machineName)
           .set({
@@ -54,12 +59,17 @@ class EmptyModel{
         'name' : '',
         'userID' : ''
       });
+      stl.doc("machineCount")
+          .update({
+        'available$machineKind' : FieldValue.increment(1)
+      });
     }
   }
 
   static void announceOther(String dormNumber, String floorNumber, String machineName, String time) async{
     var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber);
     bool available = false;
+    var machineKind = machineName.substring(1, machineName.length);
     var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
         .get().then((value) {
       available = value.data()!['state'];
@@ -73,9 +83,12 @@ class EmptyModel{
         'name' : '어플미사용자',
         'userID' : ''
       });
+      stl.doc("machineCount")
+          .update({
+        'available$machineKind' : FieldValue.increment(-1)
+      });
     }
   }
-
 
   static String getTimeDone(String inputTime){
     DateTime now = DateTime.now();
