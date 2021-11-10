@@ -104,8 +104,7 @@ class _RunPageState extends State<RunPage> {
                                     widget.machineName,
                                     _currentNumber.toString());
                               }
-                              Get.off(Process(
-                                  widget.dorm, widget.floor, widget.number, widget.machineName));                            },
+                              Get.off(CompletePage(widget.dorm, widget.floor));                            },
                             style: shortButtonStyle,
                             child: Text(
                               '입력완료',

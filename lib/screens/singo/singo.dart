@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wacoproject/model/empty_model.dart';
+import 'package:wacoproject/screens/complete.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 import 'package:wacoproject/screens/home/home.dart';
@@ -77,7 +78,7 @@ class _SingoPageState extends State<SingoPage> {
                 ),
                 FlatButton(
                     onPressed: () {
-                      Get.off(HomePage(dorm: widget.dorm, floor: widget.floor));
+                      Get.off(CompletePage(widget.dorm, widget.floor));
                     },
                     child: Text(
                       '메인으로 돌아가기',

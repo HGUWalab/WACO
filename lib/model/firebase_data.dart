@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 import 'package:wacoproject/utils/text.dart';
-import 'package:wacoproject/utils/user.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseData extends StatefulWidget {
@@ -20,7 +18,7 @@ class _FirebaseDataState extends State<FirebaseData> {
       body: Column(
         children: [
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "갈대1 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -31,7 +29,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "갈대2 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -42,7 +40,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "로뎀 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -53,7 +51,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "비전 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -64,7 +62,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "은혜 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -75,7 +73,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "하용조 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -86,7 +84,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "벧엘 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -97,7 +95,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "창조 Firebase 초기화",
                 style: body4style(color: Colors.black),
@@ -108,7 +106,7 @@ class _FirebaseDataState extends State<FirebaseData> {
             ),
           ),
           Center(
-            child: FlatButton(
+            child: TextButton(
               child: Text(
                 "국제 Firebase 초기화",
                 style: body4style(color: Colors.black),

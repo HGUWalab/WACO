@@ -23,7 +23,7 @@ class EmptyModel{
     var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber);
     bool available = false;
     var machineKind = machineName.substring(1, machineName.length);
-    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+    await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
         .get().then((value) {
       available = value.data()!['state'];
     });
@@ -60,7 +60,7 @@ class EmptyModel{
     var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber);
     bool available = false;
     var machineKind = machineName.substring(1, machineName.length);
-    var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+    await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
         .get().then((value) {
       available = value.data()!['state'];
     });
@@ -94,7 +94,7 @@ class EmptyModel{
       String currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
       var nowTime = DateTime.parse(currentTime);
       String doneTime = '';
-      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+      await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
           .get().then((value) {
         doneTime = value.data()?['endTime'];
       });
@@ -115,7 +115,7 @@ class EmptyModel{
       String currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
       var nowTime = DateTime.parse(currentTime);
       String doneTime = '';
-      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+      await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
             .get().then((value) {
               doneTime = value.data()?['endTime'];
             });
@@ -133,7 +133,7 @@ class EmptyModel{
   static Future<int> getInputTime(String dormNumber, String floorNumber, String machineName) async {
     String inputTime = '';
     try{
-      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+      await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
           .get().then((value) {
         inputTime = value.data()!['inputTime'];
       });

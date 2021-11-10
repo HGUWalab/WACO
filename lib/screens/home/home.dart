@@ -152,50 +152,50 @@ class _HomePageState extends State<HomePage> {
                             );
                           }),
                     ),
-                    Center(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              width: 350,
-                              height: 30,
-                              //color: darkGrey,
-                              decoration: BoxDecoration(
-                                color: darkGrey,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(15.0)),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/basket.png',
-                                    width: 20,
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    '$userName님은 ',
-                                    style: body9style(color: white),
-                                  ),
-                                  Text(
-                                    '1번 세탁기',
-                                    style: body7style(color: white),
-                                  ),
-                                  Text(
-                                    '를 사용중입니다.',
-                                    style: body9style(color: white),
-                                  )
-                                ],
-                              )
-                          ),
-                        ],
-                      ),
-                    ),
+                    // Center(
+                    //   child: Column(
+                    //     children: [
+                    //       SizedBox(
+                    //         height: 10,
+                    //       ),
+                    //       Container(
+                    //           width: 350,
+                    //           height: 30,
+                    //           //color: darkGrey,
+                    //           decoration: BoxDecoration(
+                    //             color: darkGrey,
+                    //             borderRadius: const BorderRadius.all(
+                    //                 Radius.circular(15.0)),
+                    //           ),
+                    //           child: Row(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Image.asset(
+                    //                 'assets/basket.png',
+                    //                 width: 20,
+                    //                 height: 20,
+                    //               ),
+                    //               SizedBox(
+                    //                 width: 10,
+                    //               ),
+                    //               Text(
+                    //                 '$userName님은 ',
+                    //                 style: body9style(color: white),
+                    //               ),
+                    //               Text(
+                    //                 '1번 세탁기',
+                    //                 style: body7style(color: white),
+                    //               ),
+                    //               Text(
+                    //                 '를 사용중입니다.',
+                    //                 style: body9style(color: white),
+                    //               )
+                    //             ],
+                    //           )
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ])),

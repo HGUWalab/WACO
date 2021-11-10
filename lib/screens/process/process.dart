@@ -29,7 +29,6 @@ class _ProcessState extends State<Process> {
   double value = 0;
 
   Future<void> getUserAndTime() async {
-    if (first) {
       _start = await EmptyModel.getInputTime(widget.dorm.toString(),
                widget.floor.toString(), widget.machineName);
       _count = await EmptyModel.getTimeLeft(widget.dorm.toString(),
@@ -38,11 +37,9 @@ class _ProcessState extends State<Process> {
         _count = 0;
         finished = true;
       }
-      first=false;
       value = 1.0-(_count/_start);
-      print('Process/getUserAndTime-userName: $userName, _start: $_start, _count: $_count');
-      setState(() {});
-    }
+      setState(() {
+      });
   }
 
   void startTimer() {
@@ -110,7 +107,7 @@ class _ProcessState extends State<Process> {
                     ),
                     Center(
                       child: TextButton(
-                        child: Text("작동 취소하기", style: body1style(color: darkGrey)),
+                        child: Text("⚠️작동 취소하기", style: body1style(color: grey)),
                         onPressed: ((){
                           EmptyModel.changeState(widget.dorm.toString(), widget.floor.toString(), widget.machineName, "0");
                           Get.off(HomePage(dorm: widget.dorm, floor: widget.floor,));
