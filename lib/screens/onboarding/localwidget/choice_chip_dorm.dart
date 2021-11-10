@@ -20,14 +20,15 @@ class ChoiceChipDorm extends StatefulWidget {
 
 class _ChoiceChipDormState extends State<ChoiceChipDorm> {
   List<String> options = [
-    '갈대상자관',
-    '국제관',
+    '갈대상자관1',
+    '갈대상자관2',
     '로뎀관',
     '비전관',
     '은혜관',
     '하용조관',
     '벧엘관',
     '창조관',
+    '국제관',
   ];
 
   @override
@@ -43,6 +44,7 @@ class _ChoiceChipDormState extends State<ChoiceChipDorm> {
       value: ChoiceChipDorm.tag,
       onChanged: (val) => setState((){
         ChoiceChipDorm.tag = val;
+        ChoiceChipFloor.tag = 0;
       }),
       choiceItems: C2Choice.listFrom<int, String>(
         source: options,

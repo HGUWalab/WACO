@@ -22,12 +22,12 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       backgroundColor: primary,
       body: Padding(
-        padding: EdgeInsets.only(left: 30.0, top: 50.0),
+        padding: EdgeInsets.only(left: width*0.08, right: width*0.08),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: height * 0.08,
+              height: height * 0.1,
             ),
             Text('Your Room',
                     style: head1style(color: white)),
@@ -37,12 +37,13 @@ class _SettingPageState extends State<SettingPage> {
               padding: EdgeInsets.only(
                   top: height * 0.03, bottom: height * 0.02),
             ),
-            ChoiceChipDorm(),
+            Center(child: ChoiceChipDorm()),
             Padding(
               padding: EdgeInsets.only(
                   top: height * 0.05, bottom: height * 0.02),
             ),
-            ChoiceChipFloor(),
+            Center(child: ChoiceChipFloor()),
+            SizedBox(height: 10),
             Center(
               child: FlatButton(
                 color: white,

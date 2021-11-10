@@ -26,6 +26,7 @@ class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
   Future<void> getUser() async {
     user = await MainModel.getUserName(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     timeLeft = await EmptyModel.getTimeLeft(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+    // timeLeft = (timeLeft/60.0) as int;
     if(this.mounted){
       setState(() {});
     }

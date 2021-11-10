@@ -4,6 +4,7 @@ import 'package:wacoproject/model/empty_model.dart';
 class MainModel{
 
   static final FirebaseFirestore db = FirebaseFirestore.instance;
+  static bool timeCheck = false;
 
   static Future<String> getUserName(String dormNumber, String floor, String machineName) async{
     String userName = '';
@@ -59,10 +60,24 @@ class MainModel{
     return count;
   }
 
-  static Future<void> checkDoneMachine(String dormNumber, String floor, String machineName)async {
-    int timeLeft = await EmptyModel.getTimeLeft(dormNumber, floor, machineName);
-    if(timeLeft < 0 ){
-      EmptyModel.changeState(dormNumber, floor, machineName, "0");
+  static void checkDoneMachine(String dormNumber, String floor, String machineName)async {
+    int timeLeft = await EmptyModel.getTimeCompare(dormNumber, floor, machineName);
+    // setState()가 1초안에 여러번 호출되서 나중에 increment(1)할 때 여러번에 함수가 동시에 되서 + 4~6이 되버린다. 이거 해결하자!
+    if(timeLeft <= 0){
+      var machineKind = machineName.substring(1, machineName.length);
+      var stl = db.collection('dormAndFloor').doc(dormNumber).collection(floor);
+      stl.doc(machineName)
+          .set({
+        'state' : true,
+        'endTime' : "none",
+        'inputTime' : 0,
+        'name' : '',
+        'userID' : ''
+      });
+      stl.doc("machineCount")
+          .update({
+        'available$machineKind' : FieldValue.increment(1)
+      });
     }
   }
 
@@ -70,46 +85,17 @@ class MainModel{
   static String getPageName(int dorm, int floor){
     String pageName = '';
     switch(dorm){
-      case 0: pageName = '갈대상자관 '; break;
-      case 1: pageName = '국제관 '; break;
+      case 0: pageName = '갈상1 '; break;
+      case 1: pageName = '갈상2 '; break;
       case 2: pageName = '로뎀관 '; break;
       case 3: pageName = '비전관 '; break;
       case 4: pageName = '은혜관 '; break;
       case 5: pageName = '하용조관 '; break;
       case 6: pageName = '벧엘관 '; break;
       case 7: pageName = '창조관 '; break;
+      case 8: pageName = '국제관 '; break;
     }
     pageName = pageName + "$floor" + "층";
     return pageName;
   }
 }
-/*
-  static Future<int> getFloor(int dormNumber) async {
-    int count = 0;
-    var collection = await db.collection('dormAndFloor').doc(dormNumber.toString());
-      collection
-        .get().then((value) {
-      count = value.data()!['floor'];
-    });
-    return count;
-  }
-
-
-  static Future<List<String>> getList(int dorm) async {
-    int floor = await getFloor(dorm);
-    List<String> floor4 = ['1층', '2층', '3층', '4층'];
-    List<String> floor5 = ['1층', '2층', '3층', '4층', '5층'];
-    List<String> floor6 = ['1층', '2층', '3층', '4층', '5층', '6층'];
-    List<String> floor10 = ['1층', '2층', '3층', '4층', '5층', '6층', '7층', '8층', '9층', '10층'];
-    List<String> toReturn = [];
-
-    switch(floor){
-      case 4: toReturn = floor4; break;
-      case 5: toReturn = floor5; break;
-      case 6: toReturn = floor6; break;
-      case 10: toReturn = floor10; break;
-    }
-
-    return toReturn;
-  }
-  */

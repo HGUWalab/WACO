@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:wacoproject/model/firebase_data.dart';
 import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/onboarding/OnBoardingPage.dart';
 import 'package:wacoproject/utils/user.dart';
@@ -25,7 +26,9 @@ class App extends StatelessWidget {
       title: 'Introduction screen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Home()
+      home:
+      //FirebaseData() //Use this for making firebase
+      Home()
     );
   }
 }

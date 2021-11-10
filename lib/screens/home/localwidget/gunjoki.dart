@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +16,7 @@ class BuildGunjoki extends StatefulWidget {
   int number;
   String machineName;
 
-  BuildGunjoki(this.dorm,this.floor, this.number, this.machineName);
+  BuildGunjoki(this.dorm, this.floor, this.number, this.machineName);
 
   @override
   _BuildGunjokiState createState() => _BuildGunjokiState();
@@ -22,19 +24,31 @@ class BuildGunjoki extends StatefulWidget {
 
 class _BuildGunjokiState extends State<BuildGunjoki> {
   var state;
+  Timer? timer;
 
   Future<void> getState() async {
-    MainModel.checkDoneMachine(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+    MainModel.checkDoneMachine(
+        widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
-    state = await MainModel.getMachineState(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+    state = await MainModel.getMachineState(
+        widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     this.state = state;
-  }//무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
+  } //무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
+
+  void initState(){
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => getState());
+  }
+
+  void dispose(){
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    getState(); //화면이 만들어지기 전에 Future<void> getState()를 통해 변수들에 값들을 저장해준다.
     return Container(
       decoration: BoxDecoration(
           color: secondary,
@@ -45,56 +59,56 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: height*0.015,
+              height: height * 0.015,
             ),
-            Text('${widget.number}',
-                style: subtitle2style(color: grey)
-            ),
+            Text('${widget.number}', style: subtitle2style(color: grey)),
             SizedBox(
-              height: height*0.015,
+              height: height * 0.015,
             ),
             buildFlatButton(),
-            SizedBox(
-                height: height*0.01
-            ),
+            SizedBox(height: height * 0.01),
             checkText(),
           ]),
     );
   }
 
   FlatButton buildFlatButton() {
-    if(state == false){
+    if (state == false) {
       return FlatButton(
         child: Container(
           width: 75,
           height: 89.37,
           decoration: this.checkBoxDeco(),
         ),
-        onPressed: () async{
-          String userID = await MainModel.getUserID(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+        onPressed: () async {
+          String userID = await MainModel.getUserID(widget.dorm.toString(),
+              widget.floor.toString(), widget.machineName);
           final SharedPreferences pref = await SharedPreferences.getInstance();
-          if((pref.getString('documentId')==userID)){
-            Get.to(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
-          }else{
-            Get.to(SomeoneIsUsingPage(widget.dorm, widget.floor, widget.number, widget.machineName));
+          if ((pref.getString('documentId') == userID)) {
+            Get.to(Process(
+                widget.dorm, widget.floor, widget.number, widget.machineName));
+          } else {
+            Get.to(SomeoneIsUsingPage(
+                widget.dorm, widget.floor, widget.number, widget.machineName));
           }
-          },
+        },
       );
-    }else{
+    } else {
       return FlatButton(
         child: Container(
           width: 75,
           height: 89.37,
           decoration: this.checkBoxDeco(),
         ),
-        onPressed: (){
-          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName, "건조"));
+        onPressed: () {
+          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number,
+              widget.machineName, "건조"));
         },
       );
     }
   }
 
-  BoxDecoration checkBoxDeco()  {
+  BoxDecoration checkBoxDeco() {
     if (state == false)
       return BoxDecoration(
         image: DecorationImage(
@@ -116,19 +130,13 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              '사용중',
-              style: body1style(color: grey)
-            ),
+            Text('사용중', style: body1style(color: grey)),
           ]);
     else
       return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-                '사용가능',
-                style: body1style(color: lightBlue)
-            )
+            Text('사용가능', style: body1style(color: lightBlue))
           ]);
   }
 }

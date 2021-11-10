@@ -6,6 +6,10 @@ class UserData{
   static bool isLoggedIn = false;
   static int lastDorm = 0;
   static int lastFloor = 0;
+  static int usingDorm = -1;
+  static int usingFloor = -1;
+  static int usingNumber = -1;
+  static String usingMachine = '';
 
   static void setData() async{
     final SharedPreferences pref = await SharedPreferences.getInstance();
@@ -15,6 +19,10 @@ class UserData{
       isLoggedIn = pref.getBool('isLoggedIn')!;
       lastDorm = pref.getInt('lastDorm')!;
       lastFloor = pref.getInt('lastFloor')!;
+      usingDorm = pref.getInt('usingDorm')!;
+      usingFloor = pref.getInt('usingFloor')!;
+      usingNumber = pref.getInt('usingNumber')!;
+      usingMachine = pref.getString('usingMachine')!;
     }catch(e){}
   }
 
@@ -22,5 +30,14 @@ class UserData{
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setInt('lastDorm', dorm);
     pref.setInt('lastFloor', floor);
+  }
+
+  static void updateUsingMachine(int dorm, int floor, int number, String machineName)async{
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt('usingDorm', usingDorm);
+    pref.setInt('usingFloor', usingFloor);
+    pref.setInt('usingNumber', usingNumber);
+    pref.setString('usingMachine', usingMachine);
+    //UserData.updateUsingMachine(widget.dorm, widget.floor, widget.number, widget.machineName);
   }
 }

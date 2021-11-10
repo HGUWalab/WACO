@@ -54,7 +54,6 @@ class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
           borderColor: Colors.white,
           labelStyle: body1style(color: white),
           showCheckmark: false),
-      //text color를 바꾸는 듯 하다
       choiceActiveStyle: C2ChoiceStyle(
         color: Colors.white,
         labelStyle: body1style(color: primary),

@@ -40,7 +40,7 @@ class TopHome extends StatelessWidget {
           ),
           Container(
             height: height*0.04,
-            width: width*0.4,
+            width: width*0.35,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25.0),
               border: Border.all(

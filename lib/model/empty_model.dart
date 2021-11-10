@@ -27,16 +27,6 @@ class EmptyModel{
         .get().then((value) {
       available = value.data()!['state'];
     });
-    if(time == "0"){
-      stl.doc(machineName)
-          .set({
-        'state' : true,
-        'endTime' : "none",
-        'inputTime' : 0,
-        'name' : '',
-        'userID' : ''
-      });
-    }
     if(available == true){
       stl.doc(machineName)
           .set({
@@ -50,7 +40,7 @@ class EmptyModel{
           .update({
         'available$machineKind' : FieldValue.increment(-1)
       });
-    }else{
+    }else if(available == false){
       stl.doc(machineName)
           .set({
         'state' : true,
@@ -98,6 +88,27 @@ class EmptyModel{
     return newDate.toString();
   }
 
+  static Future<int> getTimeCompare(String dormNumber, String floorNumber, String machineName) async {
+    try {
+      DateTime now = DateTime.now();
+      String currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
+      var nowTime = DateTime.parse(currentTime);
+      String doneTime = '';
+      var collection = await db.collection('dormAndFloor').doc(dormNumber).collection(floorNumber).doc(machineName)
+          .get().then((value) {
+        doneTime = value.data()?['endTime'];
+      });
+      if(doneTime == "none"){
+        return 1;
+      }
+      else{
+        var fireBaseTime = DateTime.parse(doneTime);
+        return int.parse(fireBaseTime.difference(nowTime).inSeconds.toString());
+      }
+    } on Exception catch (e) {}
+    return 0;
+  }
+
   static Future<int> getTimeLeft(String dormNumber, String floorNumber, String machineName) async {
     try {
       DateTime now = DateTime.now();
@@ -110,7 +121,8 @@ class EmptyModel{
             });
       if(doneTime == "none"){
         return 1;
-      }else{
+      }
+      else{
         var fireBaseTime = DateTime.parse(doneTime);
         return int.parse(fireBaseTime.difference(nowTime).inMinutes.toString());
       }

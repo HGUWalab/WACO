@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +9,7 @@ import 'package:wacoproject/screens/process/process.dart';
 import 'package:wacoproject/screens/someone_is_using/someone_is_using.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 
 class BuildSetakki extends StatefulWidget {
   int dorm;
@@ -14,7 +17,7 @@ class BuildSetakki extends StatefulWidget {
   int number;
   String machineName;
 
-  BuildSetakki(this.dorm,this.floor, this.number, this.machineName);
+  BuildSetakki(this.dorm, this.floor, this.number, this.machineName);
 
   @override
   _BuildSetakkiState createState() => _BuildSetakkiState();
@@ -22,27 +25,41 @@ class BuildSetakki extends StatefulWidget {
 
 class _BuildSetakkiState extends State<BuildSetakki> {
   var state;
-  bool update = false;
+  static int i =0;
+  Timer? timer;
 
-  Future<void> getState() async {
-    MainModel.checkDoneMachine(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+  void getState() async {
+    i++;
+    print("wprl$i");
+    MainModel.checkDoneMachine(
+        widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
-    state = await MainModel.getMachineState(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+    state = await MainModel.getMachineState(
+        widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     this.state = state;
-    if(update = false){
-      setState((){});
-      update = true;
-    }
-  }//무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
+  } //무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
+
+  //initState를 통해 getState가 1초마다 매번 불러지는 것이다.
+  // @override
+  void initState(){
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {getState();});
+    });
+    super.initState();
+  }
+
+  void dispose(){
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    getState(); //화면이 만들어지기 전에 Future<void> getState()를 통해 변수들에 값들을 저장해준다.
     return Container(
       decoration: BoxDecoration(
-        color: secondary,
+          color: secondary,
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
       width: 140,
       height: 230,
@@ -50,25 +67,21 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: height*0.015,
+              height: height * 0.015,
             ),
-            Text('${widget.number}',
-                style: subtitle2style(color: grey)
-            ),
+            Text('${widget.number}', style: subtitle2style(color: grey)),
             SizedBox(
-              height: height*0.015,
+              height: height * 0.015,
             ),
             buildFlatButton(),
-            SizedBox(
-              height: height*0.01
-            ),
+            SizedBox(height: height * 0.01),
             checkText(),
           ]),
     );
   }
 
   FlatButton buildFlatButton() {
-    if(state == false){
+    if (state == false) {
       return FlatButton(
         child: Container(
           width: 75,
@@ -76,30 +89,34 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           decoration: this.checkBoxDeco(),
         ),
         onPressed: () async {
-          String userID = await MainModel.getUserID(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
+          String userID = await MainModel.getUserID(widget.dorm.toString(),
+              widget.floor.toString(), widget.machineName);
           final SharedPreferences pref = await SharedPreferences.getInstance();
-          if((pref.getString('documentId')==userID)){
-            Get.to(Process(widget.dorm, widget.floor, widget.number, widget.machineName));
-          }else{
-            Get.to(SomeoneIsUsingPage(widget.dorm, widget.floor, widget.number, widget.machineName));
+          if ((pref.getString('documentId') == userID)) {
+            Get.to(Process(
+                widget.dorm, widget.floor, widget.number, widget.machineName));
+          } else {
+            Get.to(SomeoneIsUsingPage(
+                widget.dorm, widget.floor, widget.number, widget.machineName));
           }
         },
       );
-    }else{
+    } else {
       return FlatButton(
         child: Container(
           width: 75,
           height: 89.37,
           decoration: this.checkBoxDeco(),
         ),
-        onPressed: (){
-          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number, widget.machineName, "세탁"));
+        onPressed: () {
+          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number,
+              widget.machineName, "세탁"));
         },
       );
     }
   }
 
-  BoxDecoration checkBoxDeco()  {
+  BoxDecoration checkBoxDeco() {
     if (state == false)
       return BoxDecoration(
         image: DecorationImage(
@@ -121,19 +138,13 @@ class _BuildSetakkiState extends State<BuildSetakki> {
       return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              '사용중',
-              style: body1style(color: grey)
-            ),
+            Text('사용중', style: body1style(color: grey)),
           ]);
     else
       return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              '사용가능',
-              style: body1style(color: lightBlue)
-            )
+            Text('사용가능', style: body1style(color: lightBlue))
           ]);
   }
 }
