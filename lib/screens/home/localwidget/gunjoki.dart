@@ -37,7 +37,9 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
 
   void initState(){
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => getState());
+    timer = Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+      Future.delayed(Duration.zero, ()=> getState());
+    });
   }
 
   void dispose(){
@@ -85,10 +87,10 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
               widget.floor.toString(), widget.machineName);
           final SharedPreferences pref = await SharedPreferences.getInstance();
           if ((pref.getString('documentId') == userID)) {
-            Get.to(Process(
+            Get.off(Process(
                 widget.dorm, widget.floor, widget.number, widget.machineName));
           } else {
-            Get.to(SomeoneIsUsingPage(
+            Get.off(SomeoneIsUsingPage(
                 widget.dorm, widget.floor, widget.number, widget.machineName));
           }
         },
@@ -101,7 +103,7 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
           decoration: this.checkBoxDeco(),
         ),
         onPressed: () {
-          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number,
+          Get.off(EmptyPage(widget.dorm, widget.floor, widget.number,
               widget.machineName, "건조"));
         },
       );

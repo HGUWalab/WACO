@@ -26,6 +26,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int i = 1;
+  Timer? timer;
 
   int setakkiCount = 0;
   int gunjokiCount = 0;
@@ -50,11 +51,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState(){
+    super.initState();
+    timer = Timer.periodic(Duration(milliseconds: 100), (Timer t) {
+      Future.delayed(Duration.zero, ()=> getCount());
+    });  }
+
+  @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var userName = UserData.userName;
-    getCount();
+    // getCount();
     return Scaffold(
       backgroundColor: white,
       appBar: buildAppBar(),
@@ -183,15 +191,7 @@ class _HomePageState extends State<HomePage> {
                                     style: body9style(color: white),
                                   )
                                 ],
-                              )),
-                          TextButton(
-                            child: Text(
-                              "남은시간 보러가기",
-                              style: subtitle2style(color: darkGrey),
-                            ),
-                            onPressed: () {
-                              Get.to(Process(UserData.usingDorm, UserData.usingFloor, UserData.usingNumber, UserData.usingMachine));
-                            },
+                              )
                           ),
                         ],
                       ),

@@ -25,12 +25,10 @@ class BuildSetakki extends StatefulWidget {
 
 class _BuildSetakkiState extends State<BuildSetakki> {
   var state;
-  static int i =0;
+  int i =0, j=0;
   Timer? timer;
 
   void getState() async {
-    i++;
-    print("wprl$i");
     MainModel.checkDoneMachine(
         widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
@@ -40,12 +38,12 @@ class _BuildSetakkiState extends State<BuildSetakki> {
   } //무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
 
   //initState를 통해 getState가 1초마다 매번 불러지는 것이다.
-  // @override
+  @override
   void initState(){
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {getState();});
-    });
     super.initState();
+    timer = Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+      Future.delayed(Duration.zero, ()=> getState());
+    });
   }
 
   void dispose(){
@@ -93,10 +91,10 @@ class _BuildSetakkiState extends State<BuildSetakki> {
               widget.floor.toString(), widget.machineName);
           final SharedPreferences pref = await SharedPreferences.getInstance();
           if ((pref.getString('documentId') == userID)) {
-            Get.to(Process(
+            Get.off(Process(
                 widget.dorm, widget.floor, widget.number, widget.machineName));
           } else {
-            Get.to(SomeoneIsUsingPage(
+            Get.off(SomeoneIsUsingPage(
                 widget.dorm, widget.floor, widget.number, widget.machineName));
           }
         },
@@ -109,7 +107,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
           decoration: this.checkBoxDeco(),
         ),
         onPressed: () {
-          Get.to(EmptyPage(widget.dorm, widget.floor, widget.number,
+          Get.off(EmptyPage(widget.dorm, widget.floor, widget.number,
               widget.machineName, "세탁"));
         },
       );

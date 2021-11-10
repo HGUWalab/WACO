@@ -6,6 +6,7 @@ import 'package:wacoproject/model/main_model.dart';
 import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
+import 'package:wacoproject/utils/user.dart';
 import 'package:wacoproject/widgets/appbar.dart';
 
 class Process extends StatefulWidget {
@@ -19,7 +20,7 @@ class Process extends StatefulWidget {
 }
 
 class _ProcessState extends State<Process> {
-  var userName = "";
+  var userName = UserData.userName;
   late Timer _timer;
   bool finished = false;
   bool first = true;
@@ -29,7 +30,6 @@ class _ProcessState extends State<Process> {
 
   Future<void> getUserAndTime() async {
     if (first) {
-      userName = await MainModel.getUserName(widget.dorm.toString(), widget.floor.toString(), widget.machineName);
       _start = await EmptyModel.getInputTime(widget.dorm.toString(),
                widget.floor.toString(), widget.machineName);
       _count = await EmptyModel.getTimeLeft(widget.dorm.toString(),

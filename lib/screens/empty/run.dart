@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:wacoproject/model/empty_model.dart';
 import 'package:wacoproject/screens/complete.dart';
+import 'package:wacoproject/screens/process/process.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
 import 'package:wacoproject/utils/user.dart';
@@ -103,8 +104,8 @@ class _RunPageState extends State<RunPage> {
                                     widget.machineName,
                                     _currentNumber.toString());
                               }
-                              Get.off(CompletePage(widget.dorm, widget.floor));
-                            },
+                              Get.off(Process(
+                                  widget.dorm, widget.floor, widget.number, widget.machineName));                            },
                             style: shortButtonStyle,
                             child: Text(
                               '입력완료',

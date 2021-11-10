@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:wacoproject/model/onboarding_model.dart';
@@ -21,6 +23,7 @@ class ChoiceChipFloor extends StatefulWidget {
 
 class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
   List<String> options = [];
+  Timer? timer;
   Future<void> getCount() async {
     options = await OnboardingModel.getDormFloor(ChoiceChipDorm.tag.toString());
     if(this.mounted){
@@ -28,9 +31,16 @@ class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
     }
   }
 
+  void initState(){
+    super.initState();
+    timer = Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+      Future.delayed(Duration.zero, ()=> getCount());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    getCount();
+    // getCount();
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return ChipsChoice<int>.single(
