@@ -40,7 +40,6 @@ class _ChoiceChipFloorState extends State<ChoiceChipFloor> {
 
   @override
   Widget build(BuildContext context) {
-    // getCount();
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return ChipsChoice<int>.single(

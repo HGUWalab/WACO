@@ -37,10 +37,30 @@ class _SettingPageState extends State<SettingPage> {
               padding: EdgeInsets.only(
                   top: height * 0.03, bottom: height * 0.02),
             ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: width*0.2,
+                ),
+                Text('*갈대상자관1: 00호~13호, 갈대상자관2: 14~36호',
+                    style: body8style(color: white)),
+              ],
+            ),
             Center(child: ChoiceChipDorm()),
             Padding(
               padding: EdgeInsets.only(
                   top: height * 0.05, bottom: height * 0.02),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: width*0.42,
+                ),
+                Text('*사용가능한 세탁기 수/건조기 수',
+                    style: body8style(color: white)),
+              ],
             ),
             Center(child: ChoiceChipFloor()),
             SizedBox(height: 10),

@@ -113,7 +113,7 @@ TextStyle body7style({Color? color}) {
 
 TextStyle body8style({Color? color}) {
   return TextStyle(
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: FontWeight.bold,
     fontFamily: 'NotoSansKR',
     color: color,

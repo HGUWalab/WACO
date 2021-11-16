@@ -36,7 +36,7 @@ AppBar appBar2(double width, int dorm, int floor) {
             size: 35,
             color: primary,),
           onPressed: () {
-            Get.to(HomePage(dorm: dorm, floor: floor));
+            Get.off(HomePage(dorm: dorm, floor: floor));
           },
         )
     ),

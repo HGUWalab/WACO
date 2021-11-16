@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wacoproject/model/empty_model.dart';
+import 'package:wacoproject/screens/home/home.dart';
 import 'package:wacoproject/screens/singo/singo.dart';
 import 'package:wacoproject/utils/colors.dart';
 import 'package:wacoproject/utils/text.dart';
@@ -68,7 +69,7 @@ class _SomeoneIsUsingPageState extends State<SomeoneIsUsingPage> {
               SizedBox(height: 160,),
               ElevatedButton(
                   onPressed: (){
-                    Get.back();
+                    Get.to(HomePage(dorm: widget.dorm, floor: widget.floor));
                   },
                   style: longButtonStyle,
                   child: Text('홈으로',
