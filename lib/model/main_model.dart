@@ -60,7 +60,7 @@ class MainModel{
     return count;
   }
 
-  static void checkDoneMachine(String dormNumber, String floor, String machineName)async {
+  void checkDoneMachine(String dormNumber, String floor, String machineName)async {
     int timeLeft = await EmptyModel.getTimeCompare(dormNumber, floor, machineName);
     // setState()가 1초안에 여러번 호출되서 나중에 increment(1)할 때 여러번에 함수가 동시에 되서 + 4~6이 되버린다. 이거 해결하자!
     if(timeLeft <= 0){

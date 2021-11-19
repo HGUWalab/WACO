@@ -25,9 +25,11 @@ class BuildGunjoki extends StatefulWidget {
 class _BuildGunjokiState extends State<BuildGunjoki> {
   var state;
   Timer? timer;
+  MainModel mainModel = new MainModel();
+
 
   Future<void> getState() async {
-    MainModel.checkDoneMachine(
+    mainModel.checkDoneMachine(
         widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
     state = await MainModel.getMachineState(
@@ -35,9 +37,10 @@ class _BuildGunjokiState extends State<BuildGunjoki> {
     this.state = state;
   } //무언가 변화를 줄때는 setState(() {내용})을 사용하면 된다.
 
+  //1초 간격으로 불르게 만들어서 한번에 checkDoneMachine이 여러번 불리는 경우를 해결했다.
   void initState(){
     super.initState();
-    timer = Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       Future.delayed(Duration.zero, ()=> getState());
     });
   }

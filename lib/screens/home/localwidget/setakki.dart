@@ -27,9 +27,10 @@ class _BuildSetakkiState extends State<BuildSetakki> {
   var state;
   int i =0, j=0;
   Timer? timer;
+  MainModel mainModel = new MainModel();
 
   void getState() async {
-    MainModel.checkDoneMachine(
+    mainModel.checkDoneMachine(
         widget.dorm.toString(), widget.floor.toString(), widget.machineName);
     bool state;
     state = await MainModel.getMachineState(
@@ -41,7 +42,7 @@ class _BuildSetakkiState extends State<BuildSetakki> {
   @override
   void initState(){
     super.initState();
-    timer = Timer.periodic(Duration(milliseconds: 10), (Timer t) {
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       Future.delayed(Duration.zero, ()=> getState());
     });
   }
